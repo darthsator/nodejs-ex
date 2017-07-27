@@ -13,7 +13,7 @@ describe('Basic routes tests', function() {
         chai.request(reqServer)
         .get('/')
         .end(function(err, res) {
-            res.should.have.status(400);
+            res.should.have.status(200);
             done();
         })
 
@@ -26,6 +26,14 @@ describe('Basic routes tests', function() {
             res.should.have.status(200);
             done();
         })
+
+      it('GET to /detego should return 200', function(done){
+          chai.request(reqServer)
+          .get('/detego')
+          .end(function(err, res) {
+              res.should.have.status(200);
+              done();
+          })
 
     })
 })
