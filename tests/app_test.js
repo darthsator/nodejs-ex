@@ -16,7 +16,6 @@ describe('Basic routes tests', function() {
             res.should.have.status(200);
             done();
         })
-
     })
 
     it('GET to /pagecount should return 200', function(done){
@@ -26,14 +25,15 @@ describe('Basic routes tests', function() {
             res.should.have.status(200);
             done();
         })
-
-      it('GET to /detego should return 200', function(done){
-          chai.request(reqServer)
-          .get('/detego')
-          .end(function(err, res) {
-              res.should.have.status(200);
-              done();
-          })
-
     })
+
+    it('GET to /detego should return 200', function(done){
+        chai.request(reqServer)
+        .get('/detego')
+        .end(function(err, res) {
+            res.should.have.status(200);
+            done();
+        })
+    })
+
 })

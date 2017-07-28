@@ -103,7 +103,7 @@ app.get('/detego', function (req, res) {
       res.send('{ products: ' + count + '}');
     });
   } else {
-    res.send('{ error: -1 }' + err);
+    res.send('{ error: -1 }');
   }
 });
 
