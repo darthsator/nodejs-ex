@@ -19,4 +19,4 @@ function doSetup {
   });
   }
 }
-module.exports = TestSetup;
+module.exports = test_setup;
