@@ -53,7 +53,10 @@ describe('Basic routes tests', function() {
           if (err) throw err;
           // db.close();
         });
+      } else {
+        console.log('no server db?!');
       }
+
       done();
     })
 })
