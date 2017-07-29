@@ -1,7 +1,8 @@
 var server   = require('../server'),
     chai     = require('chai'),
     chaiHTTP = require('chai-http'),
-    should   = chai.should();
+    should   = chai.should(),
+    setup    = require('app_test');
 
 chai.use(chaiHTTP);
 
@@ -35,5 +36,10 @@ describe('Basic routes tests', function() {
             done();
         })
     })
+
+    it('inserting products should drop and insert', function(done){
+      setup.doSetup;
+      done();
+    }
 
 })

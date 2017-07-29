@@ -107,6 +107,28 @@ app.get('/detego', function (req, res) {
   }
 });
 
+app.get('/db', function (req, res) {
+  // try to initialize the db on every request if it's not already
+  // initialized.
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    var findDocuments = function(db, callback) {
+    // Get the documents collection
+    var collection = db.collection('pagecount');
+    // Find some documents
+    collection.find({}).toArray(function(err, products) {
+      assert.equal(err, null);
+      res.send("Found the following records");
+      res.send(products);
+    });
+  }
+  } else {
+    res.send('{ no db con here }')
+  }
+});
+
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
