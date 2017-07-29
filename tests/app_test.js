@@ -38,8 +38,8 @@ describe('Basic routes tests', function() {
     })
 
     it('inserting products should drop and insert', function(done){
-      setup.doSetup;
+      setup.doSetup();
       done();
-    }
+    })
 
 })
