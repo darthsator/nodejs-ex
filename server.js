@@ -114,15 +114,11 @@ app.get('/db', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    var findDocuments = function(db, callback) {
-    // Get the documents collection
-    var collection = db.collection('pagecount');
-    // Find some documents
-    collection.find({}).toArray(function(err, products) {
-      assert.equal(err, null);
-      res.send("Found the following records");
-      res.send(products);
-    });
+
+    db.collection("customers").find({}).toArray(function(err, result) {
+       if (err) throw err;
+       res.send('found following products:</br>');
+       res.send(result);
   }
   } else {
     res.send('{ no db con here }')
