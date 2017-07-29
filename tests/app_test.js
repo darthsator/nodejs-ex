@@ -2,7 +2,7 @@ var server   = require('../server'),
     chai     = require('chai'),
     chaiHTTP = require('chai-http'),
     should   = chai.should(),
-    setup    = require('test_setup');
+    setup    = require('test_setup.js');
 
 chai.use(chaiHTTP);
 
