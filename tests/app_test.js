@@ -2,7 +2,7 @@ var server   = require('../server'),
     chai     = require('chai'),
     chaiHTTP = require('chai-http'),
     should   = chai.should(),
-    setup    = require('test_setup.js');
+    setup    = require('test_setup');
 
 chai.use(chaiHTTP);
 
@@ -41,5 +41,4 @@ describe('Basic routes tests', function() {
       setup.doSetup();
       done();
     })
-
 })

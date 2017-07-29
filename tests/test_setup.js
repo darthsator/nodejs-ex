@@ -16,7 +16,7 @@ function doSetup {
     db.collection("products").insertMany(products, function(err, res) {
       if (err) throw err;
       // db.close();
-  });
+    });
   }
 }
 module.exports = test_setup;
