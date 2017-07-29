@@ -38,8 +38,8 @@ describe('Basic routes tests', function() {
 
     it('inserting products should drop and insert', function(done){
       if(server.db) {
-        let db = server.db;
-        db.collection("products").drop(function(err, delOK) {
+        var sdb = server.db;
+        sdb.collection("products").drop(function(err, delOK) {
           // if (err) throw err;
           if (delOK) console.log("Table deleted");
           // db.close();
@@ -49,7 +49,7 @@ describe('Basic routes tests', function() {
           {pid: 2, size: 'M', color: 'red' },
           {pid: 3, size: 'L', color: 'green' }
         ]
-        db.collection("products").insertMany(products, function(err, res) {
+        sdb.collection("products").insertMany(products, function(err, res) {
           if (err) throw err;
           // db.close();
         });
