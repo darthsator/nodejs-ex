@@ -6,7 +6,7 @@ function doSetup {
     db.collection("products").drop(function(err, delOK) {
       // if (err) throw err;
       if (delOK) console.log("Table deleted");
-      db.close();
+      // db.close();
     });
     products = [
       {pid: 1, size: 'S', color: 'blue' },
