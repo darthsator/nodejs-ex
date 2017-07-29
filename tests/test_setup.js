@@ -13,7 +13,7 @@ function doSetup {
       {pid: 2, size: 'M', color: 'red' },
       {pid: 3, size: 'L', color: 'green' }
     ]
-    db.collection("products").insertMany(myobj, function(err, res) {
+    db.collection("products").insertMany(products, function(err, res) {
       if (err) throw err;
       // db.close();
   });
