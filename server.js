@@ -119,7 +119,7 @@ app.get('/db', function (req, res) {
        if (err) throw err;
        res.send('found following products:</br>');
        res.send(result);
-  }
+     })
   } else {
     res.send('{ no db con here }')
   }
