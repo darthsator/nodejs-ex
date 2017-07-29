@@ -1,8 +1,7 @@
 var server   = require('../server'),
     chai     = require('chai'),
     chaiHTTP = require('chai-http'),
-    should   = chai.should(),
-    setup    = require('test_setup');
+    should   = chai.should();
 
 chai.use(chaiHTTP);
 
@@ -38,7 +37,23 @@ describe('Basic routes tests', function() {
     })
 
     it('inserting products should drop and insert', function(done){
-      setup.doSetup();
+      if(server.db) {
+        let db = server.db;
+        db.collection("products").drop(function(err, delOK) {
+          // if (err) throw err;
+          if (delOK) console.log("Table deleted");
+          // db.close();
+        });
+        products = [
+          {pid: 1, size: 'S', color: 'blue' },
+          {pid: 2, size: 'M', color: 'red' },
+          {pid: 3, size: 'L', color: 'green' }
+        ]
+        db.collection("products").insertMany(products, function(err, res) {
+          if (err) throw err;
+          // db.close();
+        });
+      }
       done();
     })
 })
