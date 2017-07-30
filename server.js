@@ -34,7 +34,7 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
 
   }
 }
- db = null,
+ db = null;
 var dbDetails = new Object();
 
 var initDb = function(callback) {
