@@ -99,9 +99,7 @@ app.get('/detego', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    db.collection('products').count(function(err, count ){
-      res.send('{ products: ' + count + '}');
-    });
+    res.render('detego_client.html', { stext : 'testing stuff'});
   } else {
     res.send('{ error: -1 }');
   }
