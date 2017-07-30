@@ -14,11 +14,21 @@ $(document).ready(function(){
     cache: true,
     success: getProductsSuccessful
   });
+  $("#conf_rooms").change(createRooms);
 // console.log(dataSink);
 
 });
 
-function createRooms(){
+function createRooms(event=null){
+  console.log(event);
+  if(event) {
+    if(parseInt(event.target.value)>5)
+    {
+      event.target.value = 5;
+    } else if(parseInt(event.target.value)<1) {
+      event.target.value = 1;
+    }
+  }
   var numDressRooms = $("#conf_rooms").val();
   var roomString = "";
   for(var i=0; i<numDressRooms;i++)
