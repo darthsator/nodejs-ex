@@ -36,29 +36,12 @@ describe('Basic routes tests', function() {
         })
     })
 
-    it('inserting products should drop and insert', function(done){
-      console.log(server);
-      if(server.db) {
-        var sdb = server.db;
-        sdb.collection("products").drop(function(err, delOK) {
-          // if (err) throw err;
-          if (delOK) console.log("Table deleted");
-          // db.close();
-        });
-        products = [
-          {pid: 1, size: 'S', color: 'blue' },
-          {pid: 2, size: 'M', color: 'red' },
-          {pid: 3, size: 'L', color: 'green' }
-        ]
-        sdb.collection("products").insertMany(products, function(err, res) {
-          if (err) throw err;
-
-        });
-      } else if(db){
-        console.log('global db works');
-      } else {
-        console.log('no server db?!');
-      }
-      done();
+    it('inserting products should drop and insert and have 200', function(done){
+      chai.request(reqServer)
+      .get('/setupTests')
+      .end(function(err, res) {
+          res.should.have.status(200);
+          done();
+      })
     })
 })

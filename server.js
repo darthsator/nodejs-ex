@@ -3,7 +3,8 @@ var express = require('express'),
     fs      = require('fs'),
     app     = express(),
     eps     = require('ejs'),
-    morgan  = require('morgan');
+    morgan  = require('morgan'),
+    test    = require('tsetup');
 
 Object.assign=require('object-assign')
 
@@ -118,6 +119,20 @@ app.get('/db', function (req, res) {
        res.send('found following products:</br>');
        res.send(result);
      })
+  } else {
+    res.send('{ no db con here }')
+  }
+});
+
+app.get('/setupTests', function (req, res) {
+  // try to initialize the db on every request if it's not already
+  // initialized.
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    tsetup.testproducts(db);
+
   } else {
     res.send('{ no db con here }')
   }
