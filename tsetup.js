@@ -1,5 +1,3 @@
-var server = require('./server');
-
 module.exports.testproducts = function(sdb)
 {
     console.log(typeof(server));
