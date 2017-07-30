@@ -3,16 +3,27 @@
   <head>
     <meta charset="utf-8">
     <title>detego dessing room</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    <script
+			  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+			  crossorigin="anonymous"></script>
     <script src="detego_client.js"></script>
   </head>
   <body>
-      <% if (stext) { %>
-        <div>
-        <p>
-          <%= stext %>
+    <div id='header'><h1>DETEGO ASSIGNMENT</h1></div>
+    <div id='main'>
+      <div id='config'>
+        <dl>
+					<dt><label for='dressing rooms'>Rooms</label></dt>
+					<dd><input type='number' id='dressing rooms' min='1' max='5'></dd>
+				</dl>
+      </div>
+      <div id="right_display">
+        
+    		<p id="myLittleConsole">
         </p>
-        </div>
-        <% } %>
+	     </div>
+    </div>
   </body>
 </html>

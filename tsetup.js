@@ -8,9 +8,9 @@ module.exports.testproducts = function(sdb) {
     // db.close();
   });
   var products = [
-    {pid: 1, size: 'S', color: 'blue' },
-    {pid: 2, size: 'M', color: 'red' },
-    {pid: 3, size: 'L', color: 'green' }
+    {tag: 1, size: 'S', color: 'blue' },
+    {tag: 2, size: 'M', color: 'red' },
+    {tag: 3, size: 'L', color: 'green' }
   ]
   sdb.collection("products").insertMany(products, function(err, res) {
     if (err) throw err;

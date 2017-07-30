@@ -1,0 +1,47 @@
+body {
+    width: 99%;
+    height: 99%;
+    background-color:#0c3458;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    font-family: 'Montserrat-Regular', 'Montserrat', 'Gotham', 'Helvetica', 'Arial', sans-serif;
+    color: white;
+}
+
+#header {
+  min-height: 2%;
+  max-height: 10%;
+  height: 15%;
+  width: 100%;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid white;
+}
+
+#main {
+    width: 85%;
+    height: auto;
+    min-height: 50%;
+    display: block;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#right_display {
+	margin-top: 5%;
+	height: 70%;
+	width: 10%;
+	float: right;
+	background: linear-gradient(rgba(12,145,236,0.1), rgba(12,145,236,0.3), rgba(12,145,236,0.1));
+    right: 6%;
+	font-size: 0.8em;
+	color: #888;
+	position: fixed;
+	padding: 5px;
+}
