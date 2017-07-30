@@ -1,6 +1,7 @@
 class Emitter {
-  constructor(ts, tid){
-    this.ts = ts;
-    this.tag = tag;
+  constructor(roomId){
+    this.emitterID = _emitterCount;
+    _emitterCount++;
+    this.roomId = roomId;
   }
 }

@@ -53,6 +53,15 @@ body {
 	overflow-x: auto;
 }
 
+.dressroom {
+   1px solid white;
+   min-width: 150px;
+   min-height: 200px;
+   float: left;
+   border: 1px solid white;
+   margin: 5px;
+}
+
 form dl {
   font-size: 9px;
 	display: inline-block;

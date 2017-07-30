@@ -118,6 +118,7 @@ app.get('/getAllProducts', function (req, res) {
   if (db) {
     db.collection('products').find({}).toArray(function(err, result) {
        if (err) throw err;
+       res.setHeader('Access-Control-Allow-Origin', '*');
        res.json(result);
      })
   } else {
