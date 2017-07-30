@@ -3,9 +3,8 @@ module.exports.testproducts = function(sdb) {
     console.log(typeof(server));
     console.log(typeof(sdb));
   sdb.collection("products").drop(function(err, delOK) {
-    // if (err) throw err;
+    if (err) throw err;
     if (delOK) console.log("Table deleted");
-    // db.close();
   });
   var products = [
     {tag: 1, size: 'S', color: 'blue' },
