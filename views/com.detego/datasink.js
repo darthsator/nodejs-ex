@@ -1,5 +1,5 @@
-class TagEvent {
-  constructor(ts, tag){
+class DataSink {
+  constructor(ts, tid){
     this.ts = ts;
     this.tag = tag;
   }

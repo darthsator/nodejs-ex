@@ -34,9 +34,8 @@ body {
 }
 
 #right_display {
-	margin-top: 5%;
 	height: 70%;
-	width: 10%;
+	width: 15%;
 	float: right;
 	background: linear-gradient(rgba(12,145,236,0.1), rgba(12,145,236,0.3), rgba(12,145,236,0.1));
     right: 6%;

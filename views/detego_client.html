@@ -4,12 +4,17 @@
   <meta charset="utf-8">
   <title>detego dessing room</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="./views/stylesheet" href="styles.css">
+  <!-- <link rel="./views/stylesheet" href="styles.css"> -->
   <!-- <link href="http://localhost/views/styles.css" type="text/css" rel="stylesheet"> -->
   <script
   src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
   integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
   crossorigin="anonymous"></script>
+
+  <script src="./com.detego/tagevent.js" type="text/javascript" ></script>
+  <script src="./com.detego/dressingroom.js" type="text/javascript" ></script>
+  <script src="./com.detego/datasink.js" type="text/javascript" ></script>
+  <script src="./com.detego/emitter.js" type="text/javascript" ></script>
 
   <script src="detego_client.js" type="text/javascript" ></script>
   <!-- <script src="./views/detego_client.js" type="text/javascript" ></script> -->
@@ -21,7 +26,7 @@
     <div id='config'>
       <dl>
         <dt><label for='dressing rooms'>Rooms</label></dt>
-        <dd><input type='number' id='dressing rooms' min='1' max='5'></dd>
+        <dd><input type='number' id='dressing rooms' min='1' max='5' value='2'></dd>
       </dl>
     </div>
     <div id="right_display">

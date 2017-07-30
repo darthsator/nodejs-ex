@@ -12,6 +12,7 @@ Object.assign=require('object-assign')
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'));
 app.use(express.static(__dirname + '/views'));
+app.set('json spaces', 2);
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
@@ -108,14 +109,13 @@ app.get('/detego', function (req, res) {
   }
 });
 
-app.get('/db', function (req, res) {
+app.get('/getAllProducts', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
   if (!db) {
     initDb(function(err){});
   }
   if (db) {
-
     db.collection('products').find({}).toArray(function(err, result) {
        if (err) throw err;
        res.json(result);
