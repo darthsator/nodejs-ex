@@ -115,7 +115,7 @@ app.get('/db', function (req, res) {
   }
   if (db) {
 
-    db.collection("customers").find({}).toArray(function(err, result) {
+    db.collection('counts').find({}).toArray(function(err, result) {
        if (err) throw err;
        res.send('found following products:</br>');
        res.send(result);

@@ -37,6 +37,7 @@ describe('Basic routes tests', function() {
     })
 
     it('inserting products should drop and insert', function(done){
+      console.log(server);
       if(server.db) {
         var sdb = server.db;
         sdb.collection("products").drop(function(err, delOK) {
@@ -55,7 +56,7 @@ describe('Basic routes tests', function() {
         });
       } else {
         console.log('no server db?!');
-        
+
       }
 
       done();
