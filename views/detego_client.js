@@ -9,7 +9,7 @@ function appendToConsole(myText) {
         +new Date().toTimeString().substr(0, 8)+": "+myText);
   }
   else if (typeof myText === 'object') {
-    $('#myLittleConsole').html($('#myLittleConsole').html()+'<br>'+new Date().toTimeString().substr(0, 9)+":");
+    $('#myLittleConsole').html($('#myLittleConsole').html()+'<br>'+new Date().toTimeString().substr(0, 8)+":");
     for (var key in myText) {
       if (!myText.hasOwnProperty(key)) continue;
       var obj = myText[key];

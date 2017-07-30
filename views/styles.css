@@ -45,6 +45,14 @@ body {
 	padding: 5px;
 }
 
+#center_display {
+	height: 100%;
+	width:80%;
+	margin-left: 5px;
+	float: left;
+	overflow-x: auto;
+}
+
 form dl {
   font-size: 9px;
 	display: inline-block;
