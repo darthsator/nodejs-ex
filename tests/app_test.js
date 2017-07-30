@@ -51,11 +51,11 @@ describe('Basic routes tests', function() {
         ]
         sdb.collection("products").insertMany(products, function(err, res) {
           if (err) throw err;
-          // db.close();
+
         });
       } else {
         console.log('no server db?!');
-        server.testing();
+        
       }
 
       done();
