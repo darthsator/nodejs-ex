@@ -138,6 +138,6 @@ initDb(function(err){
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
-module.exports.testing = function () {console.log('testing');}
-module.exports = server ;
+exports.db = db;
+
 module.exports = app ;
