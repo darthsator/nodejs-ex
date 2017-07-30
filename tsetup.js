@@ -1,5 +1,5 @@
-module.exports.testproducts = function(sdb)
-{
+module.exports.testproducts = function(sdb) {
+  var result = false;
     console.log(typeof(server));
     console.log(typeof(sdb));
   sdb.collection("products").drop(function(err, delOK) {
@@ -14,6 +14,12 @@ module.exports.testproducts = function(sdb)
   ]
   sdb.collection("products").insertMany(products, function(err, res) {
     if (err) throw err;
+    db.collection('products').count(function(err, count ){
+      if(count == products.count){
+        result=true;
+      }
+    });
 
   });
+  return result;
 }

@@ -114,9 +114,11 @@ app.get('/db', function (req, res) {
   }
   if (db) {
 
-    db.collection('counts').find({}).toArray(function(err, result) {
+    db.collection('products').find({}).toArray(function(err, result) {
        if (err) throw err;
-       res.send('found following products:</br>'+ result);
+       var products;
+       res.json(result);
+      //  res.send('found following products:</br>'+ result);
      })
   } else {
     res.send('{ no db con here }')
@@ -130,7 +132,10 @@ app.get('/setupTests', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    tsetup.testproducts(db);
+    if(tsetup.testproducts(db)){
+      res.sendStatus(200);
+      res.send('setup ok');
+    }
 
   } else {
     res.send('{ no db con here }')
