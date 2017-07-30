@@ -1,6 +1,6 @@
 var server = require('./server');
 
-exports.testproducts = function(sdb)
+module.exports.testproducts = function(sdb)
 {
     console.log(typeof(server));
     console.log(typeof(sdb));

@@ -4,7 +4,7 @@ var express = require('express'),
     app     = express(),
     eps     = require('ejs'),
     morgan  = require('morgan'),
-    test    = require('tsetup');
+    test    = require('./tsetup.js');
 
 Object.assign=require('object-assign')
 
