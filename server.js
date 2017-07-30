@@ -134,6 +134,8 @@ app.get('/setupTests', function (req, res) {
   if (db) {
     if(tsetup.testproducts(db)){
       res.sendStatus(200).send('setup ok');
+    } else {
+      res.send('insertion failed');
     }
   } else {
     res.send('{ no db con here }')
