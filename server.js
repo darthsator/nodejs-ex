@@ -34,8 +34,8 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
 
   }
 }
-var db = null,
-    dbDetails = new Object();
+ db = null,
+var dbDetails = new Object();
 
 var initDb = function(callback) {
   if (mongoURL == null) return;
@@ -136,6 +136,5 @@ initDb(function(err){
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
-exports.db = db;
-
+module.exports.db = db;
 module.exports = app ;

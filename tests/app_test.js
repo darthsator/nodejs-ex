@@ -54,11 +54,11 @@ describe('Basic routes tests', function() {
           if (err) throw err;
 
         });
+      } else if(db){
+        console.log('global db works');
       } else {
         console.log('no server db?!');
-
       }
-
       done();
     })
 })
