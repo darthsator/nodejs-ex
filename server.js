@@ -116,7 +116,7 @@ app.get('/db', function (req, res) {
 
     db.collection('products').find({}).toArray(function(err, result) {
        if (err) throw err;
-       var products;
+
        res.json(result);
       //  res.send('found following products:</br>'+ result);
      })
@@ -141,6 +141,7 @@ app.get('/setupTests', function (req, res) {
     res.send('{ no db con here }')
   }
 });
+
 
 // error handling
 app.use(function(err, req, res, next){
