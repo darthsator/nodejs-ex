@@ -25,7 +25,7 @@ function appendToConsole(myText) {
           $('#myLittleConsole').html($('#myLittleConsole').html()+'<br>'+prop + " = " + obj[prop]);
         }
       } else {
-        $('#myLittleConsole').html($('#myLittleConsole').html()+'<br>'+prop + " = " + obj[prop]);
+        $('#myLittleConsole').html($('#myLittleConsole').html()+'<br>'+key + " = " + obj);
       }
     }
   }
