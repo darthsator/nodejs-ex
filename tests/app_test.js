@@ -1,4 +1,4 @@
-var server   = require('../server'),
+var server   = require('../server.js'),
     chai     = require('chai'),
     chaiHTTP = require('chai-http'),
     should   = chai.should();
