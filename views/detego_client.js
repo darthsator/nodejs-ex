@@ -1,10 +1,10 @@
-var dressrooms = [];
-var _emitterCount=0;
-var baseUrl = "http://nodejs-mongo-persistent-darthsator-example.7e14.starter-us-west-2.openshiftapps.com/";
+var dressrooms = [],
+products = [],
+ _emitterCount=0,
+ baseUrl = "http://nodejs-mongo-persistent-darthsator-example.7e14.starter-us-west-2.openshiftapps.com/";
 
 $(document).ready(function(){
   appendToConsole('doc ready');
-  appendToConsole(new TagEvent(Date.now(), 111));
   createRooms();
 
   console.log(dressrooms);
@@ -14,6 +14,7 @@ $(document).ready(function(){
     cache: true,
     success: getProductsSuccessful
   });
+// console.log(dataSink);
 
 });
 
@@ -25,13 +26,20 @@ function createRooms(){
     var dr = new DressingRoom(i);
     dressrooms.push(dr);
     roomString += "<div id='room'"+i+" class='dressroom'></div>";
-    console.log(dr.emitter);
   }
   $('#center_display').html(roomString);
 }
 
 function getProductsSuccessful(data) {
-  var products = JSON.parse(data);
+  // var products = JSON.parse(data);
+  // console.log(typeof data);
+  // console.log(data);
+  data.forEach(function(product){
+    if(!jQuery.isEmptyObject(product))
+    {
+      products.push(product);
+    }
+  });
   console.log(products);
 }
 
