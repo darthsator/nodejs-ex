@@ -153,7 +153,7 @@ app.get('/setupTests', function (req, res) {
       res.send('insertion failed');
     }
   } else {
-    res.send('{ no db con here }')
+    res.sendStatus(404).send('{ no db con here }')
   }
 });
 
