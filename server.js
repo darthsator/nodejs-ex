@@ -109,6 +109,23 @@ app.get('/detego', function (req, res) {
   }
 });
 
+app.get('/getAllVisitors', function (req, res) {
+  // try to initialize the db on every request if it's not already
+  // initialized.
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    db.collection('counts').find({}).toArray(function(err, result) {
+       if (err) throw err;
+       res.setHeader('Access-Control-Allow-Origin', '*');
+       res.json(result);
+     })
+  } else {
+    res.send('{ no db con here }')
+  }
+});
+
 app.get('/getAllProducts', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
