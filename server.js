@@ -133,7 +133,7 @@ app.get('/getAllProducts', function (req, res) {
   }
   if (db) {
     db.collection('products').find({}).toArray(function(err, result) {
-       if (err) throw err;
+       if (err) console.log(err);
        res.setHeader('Access-Control-Allow-Origin', '*');
        res.json(result);
      })
@@ -153,7 +153,7 @@ app.get('/setupTests', function (req, res) {
       res.send('insertion failed');
     }
   } else {
-    res.sendStatus(404).send('{ no db con here }')
+    res.send('{ no db con here }');
   }
 });
 
