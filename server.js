@@ -128,8 +128,6 @@ app.get('/getAllVisitors', function (req, res) {
 });
 
 app.get('/getAllProducts', function (req, res) {
-  // try to initialize the db on every request if it's not already
-  // initialized.
   if (!db) {
     initDb(function(err){});
   }

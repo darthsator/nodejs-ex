@@ -4,10 +4,10 @@ module.exports.testproducts = function(sdb) {
     if (err) throw err;
     if (delOK) console.log("Table deleted");
   });
-  sdb.collection('counts').drop(function(err, delOK) {
-  if (err) throw err;
-  if (delOK) console.log("Table deleted");
-  });
+  // sdb.collection('counts').drop(function(err, delOK) {
+  //   if (err) throw err;
+  //   if (delOK) console.log("Table deleted");
+  // });
   var products = [
     {tag: 1, size: 'S', color: 'grey' },
     {tag: 2, size: 'M', color: 'vantablack' },
