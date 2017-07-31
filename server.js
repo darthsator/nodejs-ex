@@ -117,7 +117,7 @@ app.get('/getAllVisitors', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    db.collection('counts').find({}).toArray(function(err, result) {
+    db.collection('visitors').find({}).toArray(function(err, result) {
        if (err) throw err;
        res.setHeader('Access-Control-Allow-Origin', '*');
        res.json(result);
