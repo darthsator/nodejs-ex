@@ -14,6 +14,11 @@ app.use(morgan('combined'));
 app.use(express.static(__dirname + '/views'));
 app.set('json spaces', 2);
 
+app.use(function(req, res, next) {
+  res.locals.ua = req.get('User-Agent');
+  next();
+});
+
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
@@ -72,7 +77,7 @@ app.get('/', function (req, res) {
     var col = db.collection('counts');
     // Create a document with request IP and current time of request
 
-    col.insert({ip: req.ip, date: Date.now()});
+    col.insert({ip: req.ip, date: Date.now(), all-ips: req.ips, remote-ip: request.connection.remoteAddress, user-agent: res.locals.ua});
     col.count(function(err, count){
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
