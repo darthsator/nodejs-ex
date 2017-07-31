@@ -72,7 +72,8 @@ app.get('/', function (req, res) {
     var col = db.collection('visitors');
     // Create a document with request IP and current time of request
 
-    col.insert({ip: req.ip, date: Date.now(), allips: req.ips, useragent: req.headers('User-Agent')});
+    // col.insert({ip: req.ip, date: Date.now(), allips: req.ips, useragent: req.headers('User-Agent')});
+    col.insertOne({ip: req.ip, date: Date.now(), allips: req.ips});
     col.count(function(err, count){
       if (err) console.log(err);
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
@@ -89,11 +90,11 @@ app.get('/pagecount', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    db.collection('counts').count(function(err, count ){
-      res.send('{ pageCount: ' + count + '}');
+    db.collection('visitors').count(function(err, count ){
+      res.send('{ visitors: ' + count + '}');
     });
   } else {
-    res.send('{ pageCount: -1 }');
+    res.send('{ visitors: -1 }');
   }
 });
 
