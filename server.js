@@ -71,12 +71,13 @@ app.get('/', function (req, res) {
   if (db) {
     var col = db.collection('visitors');
     // Create a document with request IP and current time of request
-
+    console.log(col);
     // col.insert({ip: req.ip, date: Date.now(), allips: req.ips, useragent: req.headers('User-Agent')});
     // col.insertOne({ip: req.ip, date: Date.now(), allips: req.ips});
     col.insert({ip: req.ip, date: Date.now()});
     col.count(function(err, count){
       if (err) console.log(err);
+      console.log('rendering');
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
   } else {
@@ -172,5 +173,4 @@ initDb(function(err){
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
-module.exports.db = db;
 module.exports = app ;
