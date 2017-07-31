@@ -79,7 +79,7 @@ app.get('/', function (req, res) {
 
     col.insert({ip: req.ip, date: Date.now(), allips: req.ips, remoteip: request.connection.remoteAddress, useragent: res.locals.ua});
     col.count(function(err, count){
-      if (err) throw err;
+      if (err) console.log(err);
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
   } else {
