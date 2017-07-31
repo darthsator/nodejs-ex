@@ -77,7 +77,7 @@ app.get('/', function (req, res) {
     var col = db.collection('counts');
     // Create a document with request IP and current time of request
 
-    col.insert({ip: req.ip, date: Date.now(), allips: req.ips, remoteip: request.connection.remoteAddress, useragent: res.locals.ua});
+    col.insert({ip: req.ip, date: Date.now(), allips: req.ips, useragent: res.locals.ua});
     col.count(function(err, count){
       if (err) console.log(err);
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
