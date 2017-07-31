@@ -4,10 +4,14 @@ module.exports.testproducts = function(sdb) {
     if (err) throw err;
     if (delOK) console.log("Table deleted");
   });
+  sdb.collection('counts').drop(function(err, delOK) {
+  if (err) throw err;
+  if (delOK) console.log("Table deleted");
+  });
   var products = [
-    {tag: 1, size: 'S', color: 'blue' },
-    {tag: 2, size: 'M', color: 'red' },
-    {tag: 3, size: 'L', color: 'green' }
+    {tag: 1, size: 'S', color: 'grey' },
+    {tag: 2, size: 'M', color: 'vantablack' },
+    {tag: 3, size: 'L', color: 'violet' }
   ]
   sdb.collection("products").insertMany(products, function(err, res) {
     if (err) throw err;
