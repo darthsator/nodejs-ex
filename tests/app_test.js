@@ -41,7 +41,7 @@ describe('Basic routes tests', function() {
       .get('/setupTests')
       .end(function(err, res) {
         if(err) console.log(err);
-        if(res.statusCode() != 200) console.log(res);
+        if(res.status != 200) console.log(res);
           res.should.have.status(200);
           done();
       })
