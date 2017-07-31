@@ -40,8 +40,8 @@ describe('Basic routes tests', function() {
       chai.request(reqServer)
       .get('/setupTests')
       .end(function(err, res) {
-        console.log(err);
-        // console.log(res);
+        if(err) console.log(err);
+        if(res.statusCode() != 200) console.log(res);
           res.should.have.status(200);
           done();
       })
