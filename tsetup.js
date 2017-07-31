@@ -11,7 +11,9 @@ module.exports.testproducts = function(sdb) {
   var products = [
     {tag: 1, size: 'S', color: 'grey' },
     {tag: 2, size: 'M', color: 'vantablack' },
-    {tag: 3, size: 'L', color: 'violet' }
+    {tag: 3, size: 'L', color: 'violet' },
+    {tag: 4, size: 'XL', color: 'blue' },
+    {tag: 5, size: 'XS', color: 'pattern' }
   ]
   sdb.collection("products").insertMany(products, function(err, res) {
     if (err) console.log(err);
