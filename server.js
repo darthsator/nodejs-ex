@@ -69,7 +69,7 @@ app.get('/', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    var col = db.collection('counts');
+    var col = db.collection('visitors');
     // Create a document with request IP and current time of request
 
     col.insert({ip: req.ip, date: Date.now(), allips: req.ips, useragent: req.headers('User-Agent')});
