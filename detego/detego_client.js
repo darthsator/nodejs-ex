@@ -1,7 +1,7 @@
-var dressrooms = [],
-products = [],
- _emitterCount=0,
- baseUrl = "http://nodejs-mongo-persistent-darthsator-example.7e14.starter-us-west-2.openshiftapps.com/";
+var dressrooms    = [],
+    products      = [],
+    _emitterCount = 0,
+    baseUrl       = "http://nodejs-mongo-persistent-darthsator-example.7e14.starter-us-west-2.openshiftapps.com/";
 
 $(document).ready(function(){
   appendToConsole('doc ready');
@@ -22,11 +22,13 @@ $(document).ready(function(){
 function createRooms(event=null){
   console.log(event);
   if(event) {
-    if(parseInt(event.target.value)>5)
+    var maxVal = $("#conf_rooms").attr('max'),
+        minVal = $("#conf_rooms").attr('min');
+    if(parseInt(event.target.value)>maxVal)
     {
-      event.target.value = 5;
-    } else if(parseInt(event.target.value)<1) {
-      event.target.value = 1;
+      event.target.value = maxVal;
+    } else if(parseInt(event.target.value)<minVal) {
+      event.target.value = minVal;
     }
   }
   var numDressRooms = $("#conf_rooms").val();

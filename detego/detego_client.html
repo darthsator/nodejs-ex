@@ -15,7 +15,7 @@
   <script src="./classes/datasink.js" type="text/javascript" ></script>
   <script src="./classes/emitter.js" type="text/javascript" ></script>
   <script src="./classes/dressingroom.js" type="text/javascript" ></script>
-  
+
   <script src="detego_client.js" type="text/javascript" ></script>
   <!-- <script src="./views/detego_client.js" type="text/javascript" ></script> -->
   <!-- <script src="http://localhost/views/detego_client.js" type="text/javascript" ></script> -->
@@ -26,9 +26,14 @@
     <div id='config'>
       <dl>
         <dt><label for='conf_rooms'>Rooms</label></dt>
-        <dd><input type='number' id='conf_rooms' min='1' max='5' value='2'></dd>
+        <dd><input type='number' class='conf_input' id='conf_rooms' min='1' max='10' value='2'></dd>
+      </dl>
+      <dl>
+        <dt><label for='conf_rooms'>Timescale</label></dt>
+        <dd><input type='number' class='conf_input' id='conf_timescale' min='1' max='100' value='1'></dd>
       </dl>
     </div>
+    <div class='stopfloat'></div>
     <div id="center_display">
     </div>
     <div id="right_display">

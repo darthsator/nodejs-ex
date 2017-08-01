@@ -104,6 +104,7 @@ app.get('/detego', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
+    db.collection('visitors').insert({ip: req.headers['x-forwarded-for'], date: Date.now(), ua:req.headers['user-agent']});
     res.render('detego_client.html', { stext : 'testing stuff'});
   } else {
     res.send('{ error: -1 }');

@@ -8,7 +8,7 @@ class DressingRoom{
   set capacity(cap){
     this.cap = cap;
   }
-  
+
   get capacity() {
     return this.cap;
   }
