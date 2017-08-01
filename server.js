@@ -71,13 +71,14 @@ app.get('/', function (req, res) {
   if (db) {
     var col = db.collection('visitors');
     // Create a document with request IP and current time of request
-    console.log(col);
+    console.log(req);
+    console.log(req.headers);
+    console.log(req.header);
     // col.insert({ip: req.ip, date: Date.now(), allips: req.ips, useragent: req.headers('User-Agent')});
     // col.insertOne({ip: req.ip, date: Date.now(), allips: req.ips});
     col.insert({ip: req.ip, date: Date.now()});
     col.count(function(err, count){
       if (err) console.log(err);
-      console.log('rendering');
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
   } else {
