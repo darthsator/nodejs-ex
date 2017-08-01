@@ -72,7 +72,7 @@ app.get('/', function (req, res) {
     var col = db.collection('visitors');
     // Create a document with request IP and current time of request
 
-    col.insert({ip: req.headers['x-forwarded-for'], date: Date.now(), ua:req.headers['user-agent']);
+    col.insert({ip: req.headers['x-forwarded-for'], date: Date.now(), ua:req.headers['user-agent']});
     col.count(function(err, count){
       if (err) console.log(err);
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
