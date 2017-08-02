@@ -104,7 +104,7 @@ app.get('/detego', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    db.collection('visitors').insert({ip: req.headers['x-forwarded-for'], date: Date.now(), ua:req.headers['user-agent']});
+    db.collection('visitors').insert({ip: req.headers['x-forwarded-for'], date: Date.now(), ua:req.headers['user-agent'], page: '/detego'});
     res.render('detego_client.html', { stext : 'testing stuff'});
   } else {
     res.send('{ error: -1 }');
@@ -171,4 +171,5 @@ initDb(function(err){
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
+module.exports.database = db;
 module.exports = app ;

@@ -1,7 +1,8 @@
 var server   = require('../server.js'),
     chai     = require('chai'),
     chaiHTTP = require('chai-http'),
-    should   = chai.should();
+    should   = chai.should(),
+    db       = require('../database');
 
 chai.use(chaiHTTP);
 
@@ -9,6 +10,8 @@ reqServer = process.env.HTTP_TEST_SERVER || server;
 
 console.log('server:');
 console.log(reqServer);
+console.log(process.env.HTTP_TEST_SERVER == reqServer);
+console.log(db);
 
 describe('Basic routes tests', function() {
 
@@ -39,7 +42,7 @@ describe('Basic routes tests', function() {
         })
     })
 
-    it('inserting products should drop and insert and have 200', function(done){
+    it('inserting products should return 200', function(done){
       chai.request(reqServer)
       .get('/setupTests')
       .end(function(err, res) {

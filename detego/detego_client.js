@@ -3,7 +3,7 @@ var dressrooms    = [],
     _emitterCount = 0,
     baseUrl       = "http://nodejs-mongo-persistent-darthsator-example.7e14.starter-us-west-2.openshiftapps.com/";
 
-$(document).ready(function(){
+$(document).ready(function() {
   appendToConsole('doc ready');
   createRooms();
 
@@ -19,7 +19,7 @@ $(document).ready(function(){
 
 });
 
-function createRooms(event=null){
+function createRooms(event=null) {
   console.log(event);
   if(event) {
     var maxVal = $("#conf_rooms").attr('max'),
