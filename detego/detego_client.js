@@ -37,22 +37,35 @@ function createRooms(event=null) {
   {
     var dr = new DressingRoom(i);
     dressrooms.push(dr);
-    roomString += "<div id='room'"+i+" class='dressroom'></div>";
+    roomString += "<div id='room"+i+"' class='dressroom'>"
+                  +"<div class='emitter'>"
+                  +"</div>"
+                  +"</div>";
   }
-  $('#center_display').html(roomString);
+  $('#dressrooms').html(roomString);
 }
 
 function getProductsSuccessful(data) {
   // var products = JSON.parse(data);
   // console.log(typeof data);
   // console.log(data);
+  var productString = "";
   data.forEach(function(product){
     if(!jQuery.isEmptyObject(product))
     {
-      products.push(product);
+        var pr = new Product(product.tag,product.size,product.color);
+        products.push(pr);
+        productString += "<div id='product"+pr.tag+"' class='product'></div>";
+
     }
   });
-  console.log(products);
+  $('#products').html(productString);
+
+}
+
+function createProducts(event=null) {
+
+
 }
 
 function appendToConsole(myText) {

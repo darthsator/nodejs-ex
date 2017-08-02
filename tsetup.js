@@ -9,11 +9,11 @@ module.exports.testproducts = function(sdb) {
   //   if (delOK) console.log("Table deleted");
   // });
   var products = [
-    {tag: 1, size: 'S', color: 'grey' },
-    {tag: 2, size: 'M', color: 'vantablack' },
-    {tag: 3, size: 'L', color: 'violet' },
-    {tag: 4, size: 'XL', color: 'blue' },
-    {tag: 5, size: 'XS', color: 'pattern' }
+    {tag: 1,name: 'Kleid'  size: 'S', color: 'grey' },
+    {tag: 2,name: 'Schuhe' size: 'M', color: 'vantablack' },
+    {tag: 3,name: 'Rock'   size: 'L', color: 'violet' },
+    {tag: 4,name: 'Bluse'  size: 'XL', color: 'blue' },
+    {tag: 5,name: 'Tanga'  size: 'XS', color: 'pattern' }
   ]
   sdb.collection("products").insertMany(products, function(err, res) {
     if (err) console.log(err);

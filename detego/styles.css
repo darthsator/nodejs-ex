@@ -71,12 +71,28 @@ dl {
 }
 
 .dressroom {
-   1px solid white;
    min-width: 150px;
    min-height: 200px;
    float: left;
-   border: 1px solid white;
    margin: 5px;
+   border: 1px solid white;
+}
+
+.emitter {
+  margin: 0px 0px 5px 5px;
+  border: 1px solid green;
+  /*min-height: 10px;*/
+  height:10px;
+  width:95%;
+  float: right;
+}
+
+.product {
+    border: 1px solid yellow;
+    min-width: 50px;
+    min-height: 50px;
+    float: left;
+    margin: 5px;
 }
 
 .stopFloat {
