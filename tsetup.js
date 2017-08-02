@@ -17,7 +17,7 @@ module.exports.testproducts = function(sdb) {
   ]
   sdb.collection("products").insertMany(products, function(err, res) {
     if (err) console.log(err);
-    db.collection('products').count(function(err, count ){
+    sdb.collection('products').count(function(err, count ){
       if(count == products.count){
         console.log('products inserted: '+count)
         result=true;

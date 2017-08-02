@@ -1,8 +1,8 @@
 var server   = require('../server.js'),
     chai     = require('chai'),
     chaiHTTP = require('chai-http'),
-    should   = chai.should(),
-    db       = require('database');
+    should   = chai.should();
+
 
 chai.use(chaiHTTP);
 
@@ -11,7 +11,7 @@ reqServer = process.env.HTTP_TEST_SERVER || server;
 console.log('server:');
 console.log(reqServer);
 console.log(process.env.HTTP_TEST_SERVER == reqServer);
-console.log(db);
+console.log(reqServer.database);
 
 describe('Basic routes tests', function() {
 
