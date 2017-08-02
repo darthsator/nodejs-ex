@@ -29,5 +29,6 @@ module.exports.testproducts = function(sdb) {
 
     });
   });
+  console.log(result);
   return result;
 }
