@@ -17,11 +17,16 @@ module.exports.testproducts = function(sdb) {
   ]
   sdb.collection("products").insertMany(products, function(err, res) {
     if (err) console.log(err);
-    sdb.collection('products').count(function(err, count ){
-      if(count == products.count){
+    console.log('insert done');
+    sdb.collection('products').count(function(err, count ) {
+      if (err) console.log(err);
+      if(count == products.length){
         console.log('products inserted: '+count)
         result=true;
+      } else {
+        console.log('count failed')
       }
+
     });
   });
   return result;

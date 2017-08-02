@@ -9,7 +9,7 @@ $(document).ready(function() {
 
   console.log(dressrooms);
   $.ajax({
-    type: "GET",
+    dataType: "json",
     url: baseUrl+"getAllProducts",
     cache: true,
     success: getProductsSuccessful
@@ -53,9 +53,13 @@ function getProductsSuccessful(data) {
   data.forEach(function(product){
     if(!jQuery.isEmptyObject(product))
     {
-        var pr = new Product(product.tag,product.size,product.color);
+        var pr = new Product(product.tag,product.size,product.color,product.name);
         products.push(pr);
-        productString += "<div id='product"+pr.tag+"' class='product'></div>";
+        productString += "<div id='product"+pr.tag+"' class='product'>"
+                        +"<p>"
+                        +pr.name
+                        +"</p>"
+                        +"</div>";
 
     }
   });
