@@ -11,7 +11,7 @@ Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'));
-// app.use(express.static(__dirname + '/detego'));
+app.use(express.static(__dirname + '/views/classes'));
 app.set('json spaces', 2);
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
