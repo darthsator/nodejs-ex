@@ -148,9 +148,11 @@ app.get('/setupTests', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    if(tsetup.testproducts(db)){
+    var tresult = tsetup.testproducts(db);
+    if(){
       res.sendStatus(200).send('setup ok');
     } else {
+      console.log('testproducts negative...'+tsetup.testproducts(db));
       res.send('insertion failed');
     }
   } else {
