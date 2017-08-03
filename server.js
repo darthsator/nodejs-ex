@@ -11,7 +11,7 @@ Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'));
-app.use(express.static(__dirname + '/detego'));
+// app.use(express.static(__dirname + '/detego'));
 app.set('json spaces', 2);
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
@@ -105,7 +105,7 @@ app.get('/detego', function (req, res) {
   }
   if (db) {
     db.collection('visitors').insert({ip: req.headers['x-forwarded-for'], date: Date.now(), ua:req.headers['user-agent'], page: '/detego'});
-    res.render('./detego/detego_client.html', { stext : 'testing stuff'});
+    res.render('detego_client.html', { stext : 'testing stuff'});
   } else {
     res.send('{ error: -1 }');
   }

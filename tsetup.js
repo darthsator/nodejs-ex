@@ -20,11 +20,11 @@ module.exports.testproducts = function(sdb) {
     console.log('insert done');
     sdb.collection('products').count(function(err, count ) {
       if (err) console.log(err);
-      if(count == products.length){
+      if(count == products.length) {
         console.log('products inserted: '+count);
         result=true;
       } else {
-        console.log('count failed')
+        console.log('count failed');
       }
 
     });
