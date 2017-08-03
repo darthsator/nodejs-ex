@@ -21,7 +21,7 @@ module.exports.testproducts = function(sdb) {
     sdb.collection('products').count(function(err, count ) {
       if (err) console.log(err);
       if(count == products.length){
-        console.log('products inserted: '+count)
+        console.log('products inserted: '+count);
         result=true;
       } else {
         console.log('count failed')
