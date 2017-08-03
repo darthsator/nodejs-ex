@@ -24,7 +24,7 @@ module.exports.testproducts = function(sdb) {
       if(count == products.length) {
         console.log('products inserted: '+count);
         result=true;
-        console.log('result: 'result);
+        console.log('result: '+result);
       } else {
         console.log('count failed');
       }
@@ -32,5 +32,4 @@ module.exports.testproducts = function(sdb) {
     console.log(result);
     return result;
   });
-
 }
