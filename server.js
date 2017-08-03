@@ -149,7 +149,7 @@ app.get('/setupTests', function (req, res) {
   }
   if (db) {
     var tresult = tsetup.testproducts(db);
-    if(){
+    if(tresult){
       res.sendStatus(200).send('setup ok');
     } else {
       console.log('testproducts negative...'+tsetup.testproducts(db));
