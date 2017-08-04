@@ -155,6 +155,9 @@ app.get('/setupTests', function (req, res) {
         res.send('setting up test failed');
       }
     });
+  } else {
+    res.send('{ no db con here }')
+  }
 });
 
 // error handling
