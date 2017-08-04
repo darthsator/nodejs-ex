@@ -20,7 +20,6 @@ dl {
   height: 15%;
   width: 100%;
   text-align: center;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,6 +84,15 @@ dl {
   height:10px;
   width:95%;
   float: right;
+}
+
+#products {
+    border: 1px solid yellow;
+    min-width: 100px;
+    min-height: 52px;
+    height: 60px;
+    float: left;
+    margin: 5px;
 }
 
 .product {

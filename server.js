@@ -150,7 +150,7 @@ app.get('/setupTests', function (req, res) {
   if (db) {
     tsetup.testproducts(db, function(result) {
       if(result) {
-        res.sendStatus(200).send('setup ok');
+        res.send('setup ok');
       } else {
         res.send('setting up test failed');
       }

@@ -7,22 +7,22 @@ $(document).ready(function() {
   appendToConsole('doc ready');
   createRooms();
 
-  console.log(dressrooms);
+  // console.log(dressrooms);
   $.ajax({
     dataType: "json",
     url: baseUrl+"getAllProducts",
     cache: true,
-    success: getProductsSuccessful,
-    error: getProductsFailed
-  });
-  
+  })
+  .done(getProductsSuccessful)
+  .fail(getProductsFailed);
+
   $("#conf_rooms").change(createRooms);
-// console.log(dataSink);
+
 
 });
 
 function createRooms(event=null) {
-  console.log(event);
+  // console.log(event);
   if(event) {
     var maxVal = $("#conf_rooms").attr('max'),
         minVal = $("#conf_rooms").attr('min');
@@ -39,9 +39,9 @@ function createRooms(event=null) {
   {
     var dr = new DressingRoom(i);
     dressrooms.push(dr);
-    roomString += "<div id='room"+i+"' class='dressroom'>"
-                  +"<div class='emitter'>"
-                  +"</div>"
+    roomString += "<div id='room"+i+"' class='dressroom droptarget' ondrop='drop(event)' ondragover='allowDrop(event)'>"
+                  + "<div class='emitter'>"
+                  + "</div>"
                   +"</div>";
   }
   $('#dressrooms').html(roomString);
@@ -50,9 +50,9 @@ function createRooms(event=null) {
 function getProductsFailed(data, textStatus, err) {
   appendToConsole('getting products failed '+textStatus);
   appendToConsole('setting up local products');
-  products.push(Product(1337,'XXXL','PINK','Testpants1'));
-  products.push(Product(1338,'XXXS','PONK','Testpants2'));
-  products.push(Product(1339,'XXXM','PANK','Testpants3'));
+  products.push(new Product(1337,'XXXL','PINK','Testpants1'));
+  products.push(new Product(1338,'XXXS','PONK','Testpants2'));
+  products.push(new Product(1339,'XXXM','PANK','Testpants3'));
   createProducts(null);
 }
 
@@ -60,6 +60,7 @@ function getProductsSuccessful(data) {
   // var products = JSON.parse(data);
   // console.log(typeof data);
   // console.log(data);
+  appendToConsole('loaded products from server');
   data.forEach(function(product){
     if(!jQuery.isEmptyObject(product))
     {
@@ -73,13 +74,36 @@ function getProductsSuccessful(data) {
 function createProducts(event=null) {
   var productString = "";
   products.forEach(function(product) {
-    productString += "<div id='product"+product.tag+"' class='product'>"
-                  +"<p>"
-                  +product.name
-                  +"</p>"
+    productString += "<div id='product"+product.tag+"' class='product' draggable='true'"
+                  +"ondragstart='drag(event)'>"
+                  + "<p>"
+                  +   product.name
+                  + "</p>"
                   +"</div>";
   });
   $('#products').html(productString);
+
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    var dropZone = ev.target;
+    while(!dropZone.className.includes("droptarget")) {
+      dropZone = dropZone.parentNode;
+      if(!dropZone.parentNode) {
+        return;
+      }
+    }
+    dropZone.appendChild(document.getElementById(data));
 }
 
 function appendToConsole(myText) {
