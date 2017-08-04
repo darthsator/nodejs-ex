@@ -1,5 +1,6 @@
 module.exports.testproducts = function(sdb) {
   var result = false;
+
   sdb.collection("products").drop(function(err, delOK) {
     if (err) throw err;
     if (delOK) console.log("Table deleted");
@@ -20,14 +21,23 @@ module.exports.testproducts = function(sdb) {
     console.log('insert done');
     sdb.collection('products').count(function(err, count ) {
       if (err) console.log(err);
-      if(count == products.length){
-        console.log('products inserted: '+count)
+      if(count == products.length) {
+        console.log('products inserted: '+count);
         result=true;
+        console.log('result: '+result);
       } else {
-        console.log('count failed')
+        console.log('count failed');
       }
+<<<<<<< HEAD
       callback(result);
+=======
+>>>>>>> 4f245c7974f855fc328b945593265e249fda201f
     });
+    console.log(result);
+    return result;
   });
+<<<<<<< HEAD
   console.log(result);
+=======
+>>>>>>> 4f245c7974f855fc328b945593265e249fda201f
 }

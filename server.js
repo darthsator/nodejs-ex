@@ -11,7 +11,7 @@ Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'));
-app.use(express.static(__dirname + '/detego'));
+app.use(express.static(__dirname + '/views'));
 app.set('json spaces', 2);
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
@@ -105,7 +105,7 @@ app.get('/detego', function (req, res) {
   }
   if (db) {
     db.collection('visitors').insert({ip: req.headers['x-forwarded-for'], date: Date.now(), ua:req.headers['user-agent'], page: '/detego'});
-    res.render('./detego/detego_client.html', { stext : 'testing stuff'});
+    res.render('detego_client.html', { stext : 'testing stuff'});
   } else {
     res.send('{ error: -1 }');
   }
@@ -148,6 +148,7 @@ app.get('/setupTests', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
+<<<<<<< HEAD
     tsetup.testproducts(db, function(result) {
       if(result) {
         res.sendStatus(200).send('setup ok');
@@ -155,6 +156,18 @@ app.get('/setupTests', function (req, res) {
         res.send('setting up test failed');
       }
     });
+=======
+    var tresult = tsetup.testproducts(db);
+    if(tresult){
+      res.sendStatus(200).send('setup ok');
+    } else {
+      console.log('testproducts negative...'+tsetup.testproducts(db));
+      res.send('insertion failed');
+    }
+  } else {
+    res.send('{ no db con here }');
+  }
+>>>>>>> 4f245c7974f855fc328b945593265e249fda201f
 });
 
 // error handling
