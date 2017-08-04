@@ -148,14 +148,13 @@ app.get('/setupTests', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    if(tsetup.testproducts(db)){
-      res.sendStatus(200).send('setup ok');
-    } else {
-      res.send('insertion failed');
-    }
-  } else {
-    res.send('{ no db con here }');
-  }
+    tsetup.testproducts(db, function(result) {
+      if(result) {
+        res.sendStatus(200).send('setup ok');
+      } else {
+        res.send('setting up test failed');
+      }
+    });
 });
 
 // error handling

@@ -26,9 +26,8 @@ module.exports.testproducts = function(sdb) {
       } else {
         console.log('count failed')
       }
-
+      callback(result);
     });
   });
   console.log(result);
-  return result;
 }
