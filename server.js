@@ -148,7 +148,6 @@ app.get('/setupTests', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-<<<<<<< HEAD
     tsetup.testproducts(db, function(result) {
       if(result) {
         res.sendStatus(200).send('setup ok');
@@ -156,18 +155,6 @@ app.get('/setupTests', function (req, res) {
         res.send('setting up test failed');
       }
     });
-=======
-    var tresult = tsetup.testproducts(db);
-    if(tresult){
-      res.sendStatus(200).send('setup ok');
-    } else {
-      console.log('testproducts negative...'+tsetup.testproducts(db));
-      res.send('insertion failed');
-    }
-  } else {
-    res.send('{ no db con here }');
-  }
->>>>>>> 4f245c7974f855fc328b945593265e249fda201f
 });
 
 // error handling

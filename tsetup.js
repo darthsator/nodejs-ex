@@ -28,16 +28,10 @@ module.exports.testproducts = function(sdb) {
       } else {
         console.log('count failed');
       }
-<<<<<<< HEAD
       callback(result);
-=======
->>>>>>> 4f245c7974f855fc328b945593265e249fda201f
     });
     console.log(result);
     return result;
   });
-<<<<<<< HEAD
   console.log(result);
-=======
->>>>>>> 4f245c7974f855fc328b945593265e249fda201f
 }
