@@ -15,7 +15,7 @@ module.exports.testproducts = function(sdb, callback) {
     {tag: 3 ,name: 'Rock'   ,size: 'L',  color: 'violet' },
     {tag: 4 ,name: 'Bluse'  ,size: 'XL', color: 'blue' },
     {tag: 5 ,name: 'Tanga'  ,size: 'XS', color: 'pattern' }
-  ]
+  ];
   sdb.collection("products").insertMany(products, function(err, res) {
     if (err) console.log(err);
     console.log('insert done');
@@ -27,9 +27,8 @@ module.exports.testproducts = function(sdb, callback) {
       } else {
         console.log('count failed');
       }
-
+      console.log(result);
+      callback(result);
     });
   });
-  console.log(result);
-  callback(result);
 }

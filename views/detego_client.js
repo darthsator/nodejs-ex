@@ -12,8 +12,10 @@ $(document).ready(function() {
     dataType: "json",
     url: baseUrl+"getAllProducts",
     cache: true,
-    success: getProductsSuccessful
+    success: getProductsSuccessful,
+    error: getProductsFailed
   });
+  
   $("#conf_rooms").change(createRooms);
 // console.log(dataSink);
 
@@ -43,6 +45,15 @@ function createRooms(event=null) {
                   +"</div>";
   }
   $('#dressrooms').html(roomString);
+}
+
+function getProductsFailed(data, textStatus, err) {
+  appendToConsole('getting products failed '+textStatus);
+  appendToConsole('setting up local products');
+  products.push(Product(1337,'XXXL','PINK','Testpants1'));
+  products.push(Product(1338,'XXXS','PONK','Testpants2'));
+  products.push(Product(1339,'XXXM','PANK','Testpants3'));
+  createProducts(null);
 }
 
 function getProductsSuccessful(data) {
