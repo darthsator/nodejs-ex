@@ -1,4 +1,4 @@
-module.exports.testproducts = function(sdb) {
+module.exports.testproducts = function(sdb, callback) {
   var result = false;
 
   sdb.collection("products").drop(function(err, delOK) {
@@ -24,14 +24,12 @@ module.exports.testproducts = function(sdb) {
       if(count == products.length) {
         console.log('products inserted: '+count);
         result=true;
-        console.log('result: '+result);
       } else {
         console.log('count failed');
       }
-      callback(result);
+
     });
-    console.log(result);
-    return result;
   });
   console.log(result);
+  callback(result);
 }

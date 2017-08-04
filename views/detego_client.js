@@ -49,27 +49,26 @@ function getProductsSuccessful(data) {
   // var products = JSON.parse(data);
   // console.log(typeof data);
   // console.log(data);
-  var productString = "";
   data.forEach(function(product){
     if(!jQuery.isEmptyObject(product))
     {
-        var pr = new Product(product.tag,product.size,product.color,product.name);
-        products.push(pr);
-        productString += "<div id='product"+pr.tag+"' class='product'>"
-                        +"<p>"
-                        +pr.name
-                        +"</p>"
-                        +"</div>";
-
+      var pr = new Product(product.tag,product.size,product.color,product.name);
+      products.push(pr);
     }
   });
-  $('#products').html(productString);
-
+  createProducts(null);
 }
 
 function createProducts(event=null) {
-
-
+  var productString = "";
+  products.forEach(function(product) {
+    productString += "<div id='product"+product.tag+"' class='product'>"
+                  +"<p>"
+                  +product.name
+                  +"</p>"
+                  +"</div>";
+  });
+  $('#products').html(productString);
 }
 
 function appendToConsole(myText) {
