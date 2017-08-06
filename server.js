@@ -72,12 +72,14 @@ app.get('/', function (req, res) {
     var col = db.collection('visitors');
     // Create a document with request IP and current time of request
 
-    col.insert({ip: req.headers['x-forwarded-for'], date: Date.now(), ua:req.headers['user-agent']});
+    col.insert({ip: req.headers['x-forwarded-for'], date: Date.now(), ua:req.headers['user-agent'], page: '/'});
     col.count(function(err, count){
       if (err) console.log(err);
+      console.log('rendering with ' + { pageCountMessage : count, dbInfo: dbDetails });
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
   } else {
+    console.log('rendering with null');
     res.render('index.html', { pageCountMessage : null});
   }
 });
@@ -173,5 +175,5 @@ initDb(function(err){
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 
-module.exports.database = db;
 module.exports = app ;
+module.exports.database = db;

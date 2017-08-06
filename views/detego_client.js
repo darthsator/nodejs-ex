@@ -22,6 +22,7 @@ $(document).ready(function() {
 });
 
 function createRooms(event=null) {
+   $("#conf_rooms").prop('disabled', true);
   // console.log(event);
   if(event) {
     var maxVal = $("#conf_rooms").attr('max'),
@@ -33,18 +34,47 @@ function createRooms(event=null) {
       event.target.value = minVal;
     }
   }
-  var numDressRooms = $("#conf_rooms").val();
+  var numDressRooms = parseInt($("#conf_rooms").val());
   var roomString = "";
-  for(var i=0; i<numDressRooms;i++)
+  var roomsToAdd = [];
+  if(numDressRooms>dressrooms.length) {
+    var toAdd = numDressRooms - dressrooms.length;
+    for(var i=0; i < toAdd; i++) {
+      let max = 0;
+      if(dressrooms.length>0) {
+        max = Math.max.apply(
+          Math,dressrooms.map(function(o){
+            return o.id;
+        }))+1;
+      } else {
+        max=i;
+      }
+      var dr = new DressingRoom(max);
+      roomsToAdd.push(dr);
+    }
+  } else if (numDressRooms<dressrooms.length) {
+    var toRem = dressrooms.length - numDressRooms;
+    for(var i=0; i < toRem; i++) {
+      var lastRoom = dressrooms.pop();
+      lastRoom.roomproducts.forEach(function(p) {
+        $('#products').append($('#'+p));
+        return false;
+      });
+      $('#room'+lastRoom.id).remove();
+    }
+  }
+
+  for(var i=0; i<roomsToAdd.length;i++)
   {
-    var dr = new DressingRoom(i);
-    dressrooms.push(dr);
-    roomString += "<div id='room"+i+"' class='dressroom droptarget' ondrop='drop(event)' ondragover='allowDrop(event)'>"
+    var room = roomsToAdd[i];
+    roomString += "<div id='room"+room.id+"' class='dressroom droptarget' ondrop='drop(event)' ondragover='allowDrop(event)'>"
                   + "<div class='emitter'>"
                   + "</div>"
                   +"</div>";
   }
-  $('#dressrooms').html(roomString);
+  dressrooms.push.apply(dressrooms, roomsToAdd);
+  $('#dressrooms').append(roomString);
+  $("#conf_rooms").prop('disabled', false);
 }
 
 function getProductsFailed(data, textStatus, err) {
@@ -90,12 +120,21 @@ function allowDrop(ev) {
 }
 
 function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
+  let evTarget = ev.target;
+  while(evTarget.nodeName != "DIV") {
+    evTarget = evTarget.parentNode;
+    if(!evTarget.parentNode) {
+      return;
+    }
+  }
+  ev.dataTransfer.setData("parent", evTarget.parentNode.id.replace('room', ''));
+  ev.dataTransfer.setData("text", evTarget.id);
 }
 
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
+    var src = parseInt(ev.dataTransfer.getData("parent"));
     var dropZone = ev.target;
     while(!dropZone.className.includes("droptarget")) {
       dropZone = dropZone.parentNode;
@@ -103,6 +142,23 @@ function drop(ev) {
         return;
       }
     }
+    var roomId = dropZone.id.replace('room','');
+    var capacityExceeded = false;
+    dressrooms.some(function(el) {
+      if(roomId == el.id) {
+        var stop = false;
+        el.addProduct(data);
+        stop = true;
+      } else if(dropZone.id == "products") {
+        if(el.id == src) {
+          el.removeProduct(data);
+          stop = true;
+        }
+      } else {
+        stop = false;
+      }
+      return stop;
+    });
     dropZone.appendChild(document.getElementById(data));
 }
 

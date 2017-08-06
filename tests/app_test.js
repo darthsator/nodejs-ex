@@ -9,7 +9,7 @@ chai.use(chaiHTTP);
 reqServer = process.env.HTTP_TEST_SERVER || server;
 
 // console.log('server:');
-// console.log(reqServer);
+console.log(reqServer.database);
 // console.log(process.env.HTTP_TEST_SERVER == reqServer);
 // console.log(process.env.HTTP_TEST_SERVER);
 
