@@ -10,11 +10,16 @@ module.exports.testproducts = function(sdb, callback) {
   //   if (delOK) console.log("Table deleted");
   // });
   var products = [
-    {tag: 1 ,name: 'Kleid'  ,size: 'S',  color: 'grey' },
-    {tag: 2 ,name: 'Schuhe' ,size: 'M',  color: 'vantablack' },
-    {tag: 3 ,name: 'Rock'   ,size: 'L',  color: 'violet' },
-    {tag: 4 ,name: 'Bluse'  ,size: 'XL', color: 'blue' },
-    {tag: 5 ,name: 'Tanga'  ,size: 'XS', color: 'pattern' }
+    {tag: 1  ,name: 'Kleid'  ,size: 'S',  color: 'grey' },
+    {tag: 2  ,name: 'Schuhe' ,size: 'M',  color: 'vantablack' },
+    {tag: 3  ,name: 'Rock'   ,size: 'L',  color: 'violet' },
+    {tag: 4  ,name: 'Bluse'  ,size: 'XL', color: 'blue' },
+    {tag: 5  ,name: 'Tanga'  ,size: 'XS', color: 'pattern' }
+    {tag: 6  ,name: 'Jeans'  ,size: 'M',  color: 'yellow' }
+    {tag: 7  ,name: 'Top'    ,size: 'L',  color: 'green' }
+    {tag: 8  ,name: 'Shirt'  ,size: 'S',  color: 'brown' }
+    {tag: 9  ,name: 'Short'  ,size: 'M',  color: 'orange' }
+    {tag: 10 ,name: 'Hoodie' ,size: 'XS',  color: 'red' }
   ];
   sdb.collection("products").insertMany(products, function(err, res) {
     if (err) console.log(err);
