@@ -8,13 +8,17 @@ class DataSink {
       this.eventQueue = [];
       this.toSend = [];
       this.timerVal = setInterval(this.sendEvents.bind(this), this.sendInterval);
-      this.blockSend = false;
+      this.sendBlock = false;
       DataSink.instance = this;
     }
     return DataSink.instance;
 }
-static getInstance(){
-  return new DataSink();
+static getInstance() {
+  return DataSink.instance;
+}
+
+set blockSend(block) {
+  this.sendBlock = block;
 }
 addEvent(evt) {
   this.eventQueue.push(evt);
@@ -25,35 +29,33 @@ addEvent(evt) {
 }
 
 sendEvents() {
-  if(!this.blockSend) {
-    this.blockSend = true;
-    this.toSend = this.eventQueue.slice();
-    if(this.toSend.length>0) {
-      $.ajax({
-        type: "POST",
-        dataType: "json",
-        data: toSend,
-        url: this.endpointURL
-      })
-      .done(this.sentEvents)
-      .fail(this.sendFailed);
-    }
+  this.toSend = this.eventQueue.slice();
+  if(this.toSend.length>0) {
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      data: this.toSend,
+      url: this.endpointURL
+    })
+    .done(this.sentEvents)
+    .fail(this.sendFailed);
   }
 }
 
-sentEvents(){
+sentEvents() {
   console.log('success');
   this.eventQueue = this.eventQueue.filter(item => !(arr2.some(item2 => item.name === item2.name)));
   this.toSend = [];
-  this.blockSend=false;
+
 };
 
-sendFailed(){
+sendFailed() {
   console.log('error');
-  this.blockSend=false;
+
+  this.toSend = [];
 };
 
 }
 
 const dataSink = new DataSink();
-Object.freeze(dataSink);
+// Object.freeze(dataSink);

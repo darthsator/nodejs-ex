@@ -172,11 +172,11 @@ app.post('/sendEvents',function(req, res) {
   }
   if (db) {
       var col = db.collection('roomEvents');
-      col.insertMany(postData, function(err, result){
+      col.insertMany(postData, function(err, result) {
         if (err) console.log(err);
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.json(result);
-      })
+      });
       // postData.forEach(function(evt){
       //   col.insert
       // });
