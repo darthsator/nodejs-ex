@@ -187,26 +187,23 @@ function drop(ev) {
     }
     var roomId = dropZone.id.replace('room','');
     var capacityExceeded = false;
+
     dressrooms.some(function(el) {
       if(roomId == el.id) {
-        if(el.roomproducts.length>el.capacity) {
+        if(el.roomproducts.length>=el.capacity) {
           appendToConsole('capacity of room '+el.id+' exceeded');
-          return;
+          capacityExceeded = true;
+          return true;
         }
-        var stop = false;
         el.addProduct(data);
-        stop = true;
-      } else if(dropZone.id == "products") {
-        if(el.id == src) {
-          el.removeProduct(data);
-          stop = true;
-        }
-      } else {
-        stop = false;
       }
-      return stop;
+      if(el.id == src) {
+        el.removeProduct(data);
+      }
     });
-    dropZone.appendChild(document.getElementById(data));
+    if(!capacityExceeded) {
+      dropZone.appendChild(document.getElementById(data));
+    }
 }
 
 function appendToConsole(myText) {
