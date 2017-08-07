@@ -218,13 +218,16 @@ app.post('/loadStats', function(req, res){
   if (db) {
     var result = '{empty}';
     console.log('Method: '+ evtMethod);
+
     switch (evtMethod) {
       case 'sessionCount':
-      console.log('need session count');
+        console.log('need session count');
+        res.json('{count sessions shold be here: 35415}');
       break;
       default:
-      db.collection('roomEvents').count(function(err, count ){
+      db.collection('roomEvents').count(function(err, count ) {
         if (err) console.log(err);
+        console.log('count events: '+count);
         res.json('{ events: ' + count + '}');
       });
       break;
