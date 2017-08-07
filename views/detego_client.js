@@ -68,11 +68,12 @@ $(document).ready(function() {
 });
 
 function loadStats(){
+  var command = {stats:'test'};
   $.ajax({
     type: "POST",
     dataType: "json",
     contentType: "application/json;charset=UTF-8",
-    data: JSON.stringify({stats:'test'}),
+    data: JSON.stringify(command),
     url: baseUrl+'loadStats'
   })
 }
