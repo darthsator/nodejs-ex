@@ -164,12 +164,15 @@ app.get('/setupTests', function (req, res) {
   }
 });
 
-app.post('/sendEvents',function(req, res) {
+app.post('/sendEvents', function(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
   var postData = req.body;
-  console.log('req: ');
-  console.log(req.json);
-  console.log('postData:');
-  console.log(JSON.stringify(postData));
+  console.log(req.body);
+  req.on('data', function (chunk) {
+        console.log('GOT DATA!');
+        console.log(chunk);
+    });
+  // console.log();
   if (!db) {
     initDb(function(err){});
   }
