@@ -7,6 +7,7 @@ class DataSink {
       this.maxSendCount = maxSendCount;
       this.eventQueue = [];
       this.toSend = [];
+      this.localSavedEvents = [];
       this.timerVal = setInterval(this.sendEvents.bind(this), this.sendInterval);
       this.sendBlock = false;
       DataSink.instance = this;
@@ -37,25 +38,27 @@ sendEvents() {
       data: this.toSend,
       url: this.endpointURL
     })
-    .done(this.sentEvents)
-    .fail(this.sendFailed);
+    .done(this.sentEvents.bind(this))
+    .fail(this.sendFailed.bind(this));
   }
 }
 
 sentEvents() {
-  console.log('success');
-  this.eventQueue = this.eventQueue.filter(item => !(arr2.some(item2 => item.name === item2.name)));
-  this.toSend = [];
+  appendToConsole('events successfully sent to server');
+  this.eventQueue = this.eventQueue.filter(item => !(this.toSend.some(item2 => item.ts === item2.ts)));
+  this.toSend.length=0;
 
 };
 
 sendFailed() {
-  console.log('error');
-
-  this.toSend = [];
+  appendToConsole('cant send events, just store them locally...');
+  this.localSavedEvents = this.localSavedEvents.concat(this.toSend);
+  this.eventQueue = this.eventQueue.filter(item => !(this.toSend.some(item2 => item.ts === item2.ts)));---+--
+  this.toSend.length=0;
+  // console.log(this.toSend);
 };
 
 }
 
 const dataSink = new DataSink();
-// Object.freeze(dataSink);
+Object.seal(dataSink);
