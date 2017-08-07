@@ -211,21 +211,24 @@ app.post('/loadStats', function(req, res){
   console.log(postData);
   var evtMethod = postData.stats;
   console.log(postData.stats);
+
   if (!db) {
     initDb(function(err){});
   }
   if (db) {
     var result = '{}';
+    console.log('Method: '+ evtMethod);
     switch (evtMethod) {
       case 'sessionCount':
       console.log('need session count');
       break;
       default:
       db.collection('roomEvents').count(function(err, count ){
-        result = '{ Events: ' + count + '}';
+        res.json('{ events: ' + count + '}');
       });
+      break;
     }
-    res.json(result);
+
   } else {
     res.send('{ no db con here }')
   }
