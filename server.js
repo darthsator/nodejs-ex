@@ -171,10 +171,7 @@ app.post('/sendEvents', function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   var postData = req.body;
   console.log(req.body);
-  req.on('data', function (chunk) {
-        console.log('GOT DATA!');
-        console.log(chunk);
-    });
+
   // console.log();
   if (!db) {
     initDb(function(err){});
@@ -204,6 +201,29 @@ app.get('/getAllEvents', function (req, res) {
        res.setHeader('Access-Control-Allow-Origin', '*');
        res.json(result);
      });
+  } else {
+    res.send('{ no db con here }')
+  }
+});
+
+app.post('/getStats', function(req, res){
+  var postData = req.body;
+  var evtMethod = postData.stats;
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    var result = '{}';
+    switch (evtMethod) {
+      case 'sessionCount':
+      console.log('need session count');
+      break;
+      default:
+      db.collection('roomEvents').count(function(err, count ){
+        result='{ Events: ' + count + '}';
+      )};
+    }
+    res.json(result);
   } else {
     res.send('{ no db con here }')
   }
