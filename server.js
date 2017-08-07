@@ -195,7 +195,7 @@ app.get('/getAllEvents', function (req, res) {
        if (err) console.log(err);
        res.setHeader('Access-Control-Allow-Origin', '*');
        res.json(result);
-     })
+     });
   } else {
     res.send('{ no db con here }')
   }

@@ -6,7 +6,9 @@ class DataSink {
       this.sendInterval = sendInterval;
       this.maxSendCount = maxSendCount;
       this.eventQueue = [];
+      this.toSend = [];
       this.timerVal = setInterval(this.sendEvents.bind(this), this.sendInterval);
+      this.blockSend = false;
       DataSink.instance = this;
     }
     return DataSink.instance;
@@ -16,25 +18,39 @@ static getInstance(){
 }
 addEvent(evt) {
   this.eventQueue.push(evt);
+  if (this.eventQueue.length > this.maxSendCount)
+  {
+    this.sendEvents();
+  }
 }
 
-sendEvents(){
-  if(this.eventQueue.length>0){
-    $.ajax({
-      dataType: "json",
-      url: this.endpointURL,
-      cache: false,
-    })
-    .done(this.sentEvents)
-    .fail(this.sendFailed);
+sendEvents() {
+  if(!this.blockSend) {
+    this.blockSend = true;
+    this.toSend = this.eventQueue.slice();
+    if(this.toSend.length>0) {
+      $.ajax({
+        type: "POST",
+        dataType: "json",
+        data: toSend,
+        url: this.endpointURL
+      })
+      .done(this.sentEvents)
+      .fail(this.sendFailed);
+    }
   }
 }
 
 sentEvents(){
   console.log('success');
+  this.eventQueue = this.eventQueue.filter(item => !(arr2.some(item2 => item.name === item2.name)));
+  this.toSend = [];
+  this.blockSend=false;
 };
+
 sendFailed(){
   console.log('error');
+  this.blockSend=false;
 };
 
 }
