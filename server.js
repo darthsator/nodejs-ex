@@ -1,10 +1,10 @@
 //  OpenShift sample Node application
-var express = require('express'),
-    fs      = require('fs'),
-    app     = express(),
-    eps     = require('ejs'),
-    morgan  = require('morgan'),
-    tsetup  = require('./tsetup.js'),
+var express    = require('express'),
+    fs         = require('fs'),
+    app        = express(),
+    eps        = require('ejs'),
+    morgan     = require('morgan'),
+    tsetup     = require('./tsetup.js'),
     bodyParser = require('body-parser');
 
 
@@ -14,6 +14,9 @@ app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'));
 app.use(express.static(__dirname + '/views'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.set('json spaces', 2);
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
