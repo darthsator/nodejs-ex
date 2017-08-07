@@ -20,6 +20,8 @@ $(document).ready(function() {
   $("#conf_rooms").change(createRooms);
 
 
+
+
   // var data;
   //      var chart;
   //
@@ -64,6 +66,16 @@ $(document).ready(function() {
 
 
 });
+
+function loadStats(){
+  $.ajax({
+    type: "POST",
+    dataType: "json",
+    contentType: "application/json;charset=UTF-8",
+    data: JSON.stringify({stats:'test'}),
+    url: baseUrl+'loadStats'
+  })
+}
 
 function createRooms(event=null) {
    $("#conf_rooms").prop('disabled', true);

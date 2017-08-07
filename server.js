@@ -206,7 +206,7 @@ app.get('/getAllEvents', function (req, res) {
   }
 });
 
-app.post('/getStats', function(req, res){
+app.post('/loadStats', function(req, res){
   var postData = req.body;
   console.log(postData);
   var evtMethod = postData.stats;
