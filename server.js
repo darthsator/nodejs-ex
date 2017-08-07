@@ -220,8 +220,8 @@ app.post('/getStats', function(req, res){
       break;
       default:
       db.collection('roomEvents').count(function(err, count ){
-        result='{ Events: ' + count + '}';
-      )};
+        result = '{ Events: ' + count + '}';
+      });
     }
     res.json(result);
   } else {
