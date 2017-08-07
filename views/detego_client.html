@@ -16,6 +16,10 @@
   <script src="./classes/emitter.js" type="text/javascript" ></script>
   <script src="./classes/product.js" type="text/javascript" ></script>
   <script src="./classes/dressingroom.js" type="text/javascript" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" type="text/javascript" ></script>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 
   <script src="detego_client.js" type="text/javascript" ></script>
   <!-- <script src="./views/detego_client.js" type="text/javascript" ></script> -->
@@ -40,6 +44,11 @@
       <div class="stopFloat"></div>
       <div id='products' class='droptarget' ondrop='drop(event)' ondragover='allowDrop(event)'></div>
       <div class="stopFloat"></div>
+      <div class='hseperator'></div>
+      <div id='statistics'>
+        <div id="chart_div" style="width:400; height:300"></div>
+
+      </div>
     </div>
     <div id="right_display">
       <p id="myLittleConsole">

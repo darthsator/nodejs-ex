@@ -18,6 +18,14 @@ static getInstance() {
   return DataSink.instance;
 }
 
+set localEvents(evts) {
+  this.localSavedEvents = evts;
+}
+
+get localEvents() {
+  return this.localSavedEvents;
+}
+
 set blockSend(block) {
   this.sendBlock = block;
 }
@@ -53,8 +61,9 @@ sentEvents() {
 sendFailed() {
   appendToConsole('cant send events, just store them locally...');
   this.localSavedEvents = this.localSavedEvents.concat(this.toSend);
-  this.eventQueue = this.eventQueue.filter(item => !(this.toSend.some(item2 => item.ts === item2.ts)));---+--
+  this.eventQueue = this.eventQueue.filter(item => !(this.toSend.some(item2 => item.ts === item2.ts)));
   this.toSend.length=0;
+
   // console.log(this.toSend);
 };
 

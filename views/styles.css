@@ -69,6 +69,21 @@ dl {
   margin-top: 5px;
 }
 
+#products {
+    border: 1px solid yellow;
+    min-width: 300px;
+    min-height: 52px;
+    height: 60px;
+    float: left;
+    margin: 5px;
+}
+
+#statistics {
+  min-height: 100px;
+  background-color:#0d3963;
+}
+
+
 .dressroom {
    min-width: 150px;
    min-height: 200px;
@@ -86,13 +101,8 @@ dl {
   float: right;
 }
 
-#products {
-    border: 1px solid yellow;
-    min-width: 300px;
-    min-height: 52px;
-    height: 60px;
-    float: left;
-    margin: 5px;
+.hseperator {
+  height: 75px;
 }
 
 .product {
@@ -102,6 +112,7 @@ dl {
     float: left;
     margin: 5px;
 }
+
 
 .stopFloat {
 	clear: both;
