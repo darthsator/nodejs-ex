@@ -3,6 +3,8 @@ var dressrooms    = [],
     _emitterCount = 0,
     baseUrl       = "http://nodejs-mongo-persistent-darthsator-example.7e14.starter-us-west-2.openshiftapps.com/";
 
+
+
 $(document).ready(function() {
   appendToConsole('doc ready');
   createRooms();
