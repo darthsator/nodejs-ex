@@ -18,45 +18,45 @@ $(document).ready(function() {
   $("#conf_rooms").change(createRooms);
 
 
-  var data;
-       var chart;
-
-        // Load the Visualization API and the piechart package.
-        google.charts.load('current', {'packages':['corechart']});
-
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.charts.setOnLoadCallback(drawChart);
-
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
-        function drawChart() {
-
-          // Create our data table.
-          var data = google.visualization.arrayToDataTable([
-           ['Minute', 'Events'],
-           ['2004',    400],
-           ['2005',    460],
-           ['2006',    1120],
-           ['2007',    540]
-         ]);
-
-          // Set chart options
-          var options = {'title':'How Much Pizza I Ate Last Night',
-                         'width':400,
-                         'height':300};
-
-          // Instantiate and draw our chart, passing in some options.
-          chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-          google.visualization.events.addListener(chart, 'select', selectHandler);
-          chart.draw(data, options);
-        }
-
-        function selectHandler() {
-          var selectedItem = chart.getSelection()[0];
-          var value = data.getValue(selectedItem.row, 0);
-          alert('The user selected ' + value);
-        }
+  // var data;
+  //      var chart;
+  //
+  //       // Load the Visualization API and the piechart package.
+  //       google.charts.load('current', {'packages':['corechart']});
+  //
+  //       // Set a callback to run when the Google Visualization API is loaded.
+  //       google.charts.setOnLoadCallback(drawChart);
+  //
+  //       // Callback that creates and populates a data table,
+  //       // instantiates the pie chart, passes in the data and
+  //       // draws it.
+  //       function drawChart() {
+  //
+  //         // Create our data table.
+  //         var data = google.visualization.arrayToDataTable([
+  //          ['Minute', 'Events'],
+  //          ['2004',    400],
+  //          ['2005',    460],
+  //          ['2006',    1120],
+  //          ['2007',    540]
+  //        ]);
+  //
+  //         // Set chart options
+  //         var options = {'title':'How Much Pizza I Ate Last Night',
+  //                        'width':400,
+  //                        'height':300};
+  //
+  //         // Instantiate and draw our chart, passing in some options.
+  //         chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+  //         google.visualization.events.addListener(chart, 'select', selectHandler);
+  //         chart.draw(data, options);
+  //       }
+  //
+  //       function selectHandler() {
+  //         var selectedItem = chart.getSelection()[0];
+  //         var value = data.getValue(selectedItem.row, 0);
+  //         alert('The user selected ' + value);
+  //       }
 
 
 
@@ -125,6 +125,7 @@ function getProductsFailed(data, textStatus, err) {
   products.push(new Product(1337,'XXXL','PINK','Testpants1'));
   products.push(new Product(1338,'XXXS','PONK','Testpants2'));
   products.push(new Product(1339,'XXXM','PANK','Testpants3'));
+  products.push(new Product(1339,'XXXM','PUNK','Testpants4'));
   createProducts(null);
 }
 
@@ -188,6 +189,10 @@ function drop(ev) {
     var capacityExceeded = false;
     dressrooms.some(function(el) {
       if(roomId == el.id) {
+        if(el.roomproducts.length>el.capacity) {
+          appendToConsole('capacity of room '+el.id+' exceeded');
+          return;
+        }
         var stop = false;
         el.addProduct(data);
         stop = true;
