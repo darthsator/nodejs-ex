@@ -210,6 +210,7 @@ app.post('/loadStats', function(req, res){
   var postData = req.body;
   console.log(postData);
   var evtMethod = postData.stats;
+  console.log(postData.stats);
   if (!db) {
     initDb(function(err){});
   }
