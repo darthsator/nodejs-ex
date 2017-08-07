@@ -43,7 +43,7 @@ sendEvents() {
     $.ajax({
       type: "POST",
       dataType: "json",
-      data: this.toSend,
+      data: JSON.stringify(this.toSend),
       url: this.endpointURL
     })
     .done(this.sentEvents.bind(this))

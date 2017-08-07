@@ -46,6 +46,12 @@ dl {
 	color: #888;
 	position: fixed;
 	padding: 5px;
+  overflow-y: hidden;
+}
+
+#right_display p {
+  height: 100%;
+ overflow-y: auto;
 }
 
 #center_display {

@@ -166,6 +166,7 @@ app.get('/setupTests', function (req, res) {
 
 app.post('/sendEvents',function(req, res) {
   var postData = req.body;
+  console.log('postData:');
   console.log(postData);
   if (!db) {
     initDb(function(err){});

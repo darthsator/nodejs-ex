@@ -207,10 +207,14 @@ function drop(ev) {
 }
 
 function appendToConsole(myText) {
-
   if(typeof myText === 'string') {
-    $('#myLittleConsole').html($('#myLittleConsole').html()+'<br>'
+    if($('#myLittleConsole').html().length > 5000) {
+      $('#myLittleConsole').html('console cleared...<br>'
         +new Date().toTimeString().substr(0, 8)+": "+myText);
+    } else {
+      $('#myLittleConsole').html($('#myLittleConsole').html()+'<br>'
+        +new Date().toTimeString().substr(0, 8)+": "+myText);
+        }
   }
   else if (typeof myText === 'object') {
     $('#myLittleConsole').html($('#myLittleConsole').html()+'<br>'+new Date().toTimeString().substr(0, 8)+":");
@@ -219,7 +223,11 @@ function appendToConsole(myText) {
       var obj = myText[key];
       if(obj && obj.length>1) {
         for (var prop in obj) {
-          $('#myLittleConsole').html($('#myLittleConsole').html()+'<br> '+prop + " = " + obj[prop]);
+          if($('#myLittleConsole').html().length > 5000) {
+            $('#myLittleConsole').html('cleaned console...'+'<br> '+prop + " = " + obj[prop]);
+          } else {
+            $('#myLittleConsole').html($('#myLittleConsole').html()+'<br> '+prop + " = " + obj[prop]);
+          }
         }
       } else {
         $('#myLittleConsole').html($('#myLittleConsole').html()+'<br> '+key + " = " + obj);
