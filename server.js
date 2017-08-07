@@ -4,7 +4,8 @@ var express = require('express'),
     app     = express(),
     eps     = require('ejs'),
     morgan  = require('morgan'),
-    tsetup  = require('./tsetup.js');
+    tsetup  = require('./tsetup.js'),
+    bodyParser = require('body-parser');
 
 
 Object.assign=require('object-assign')
@@ -12,6 +13,7 @@ Object.assign=require('object-assign')
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'));
 app.use(express.static(__dirname + '/views'));
+app.use(bodyParser.json());
 app.set('json spaces', 2);
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
@@ -157,6 +159,43 @@ app.get('/setupTests', function (req, res) {
         res.send('setting up test failed');
       }
     });
+  } else {
+    res.send('{ no db con here }')
+  }
+});
+
+app.post('/sendEvents',function(req, res) {
+  var postData = req.body;
+  console.log(postData);
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+      var col = db.collection('roomEvents');
+      col.insertMany(postData, function(err, result){
+        if (err) console.log(err);
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.json(result);
+      })
+      // postData.forEach(function(evt){
+      //   col.insert
+      // });
+
+  } else {
+    res.send('{ no db con here }')
+  }
+});
+
+app.get('/getAllEvents', function (req, res) {
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    db.collection('roomEvents').find({}).toArray(function(err, result) {
+       if (err) console.log(err);
+       res.setHeader('Access-Control-Allow-Origin', '*');
+       res.json(result);
+     })
   } else {
     res.send('{ no db con here }')
   }
