@@ -216,7 +216,7 @@ app.post('/loadStats', function(req, res){
     initDb(function(err){});
   }
   if (db) {
-    var result = '{}';
+    var result = '{empty}';
     console.log('Method: '+ evtMethod);
     switch (evtMethod) {
       case 'sessionCount':
@@ -224,6 +224,7 @@ app.post('/loadStats', function(req, res){
       break;
       default:
       db.collection('roomEvents').count(function(err, count ){
+        if (err) console.log(err);
         res.json('{ events: ' + count + '}');
       });
       break;
