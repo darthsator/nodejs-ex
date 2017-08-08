@@ -207,6 +207,7 @@ app.get('/getAllEvents', function (req, res) {
 });
 
 app.post('/loadStats', function(req, res){
+  res.setHeader('Access-Control-Allow-Origin', '*');
   var postData = req.body;
   console.log(postData);
   var evtMethod = postData.stats;
