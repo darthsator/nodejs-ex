@@ -31,10 +31,8 @@ function createChart(data) {
    // instantiates the pie chart, passes in the data and
    // draws it.
    function drawChart() {
-
      // Create our data table.
      var data = google.visualization.arrayToDataTable(dataArray
-
       // ['2004',    400],
       // ['2005',    460],
       // ['2006',    1120],
@@ -44,11 +42,13 @@ function createChart(data) {
      // Set chart options
      var options = {'title':$('#stats_method').val(),
                     'width':400,
-                    'height':300};
+                    'height':300,
+                  legend: { position: 'bottom' }
+                  };
 
-     // Instantiate and draw our chart, passing in some options.
-     chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-     google.visualization.events.addListener(chart, 'select', selectHandler);
+   // Instantiate and draw our chart, passing in some options.
+     chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+    //  google.visualization.events.addListener(chart, 'select', selectHandler);
      chart.draw(data, options);
    }
 
