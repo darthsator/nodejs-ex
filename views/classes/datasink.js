@@ -53,7 +53,7 @@ sendEvents() {
 }
 
 sentEvents() {
-  appendToConsole('events successfully sent to server');
+  appendToConsole(this.toSend.length+' events successfully sent to server');
   this.eventQueue = this.eventQueue.filter(item => !(this.toSend.some(item2 => item.ts === item2.ts)));
   this.toSend.length=0;
 
