@@ -14,8 +14,8 @@ function loadStats(command){
     contentType: "application/json;charset=UTF-8",
     data: JSON.stringify(command),
     url: baseUrl+'loadStats'
-  });
-  .done(createChart(data));
+  })
+  .done(createChart);
 }
 
 function createChart(data) {
@@ -39,10 +39,10 @@ function createChart(data) {
       // ['2005',    460],
       // ['2006',    1120],
       // ['2007',    540]
-    ]);
+    );
 
      // Set chart options
-     var options = {'title':$('#stats_method').val();,
+     var options = {'title':$('#stats_method').val(),
                     'width':400,
                     'height':300};
 
