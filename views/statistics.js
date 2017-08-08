@@ -25,7 +25,7 @@ function createChart(data) {
    var dataArray = [];
    dataArray.push(['Session', 'Events']);
    data.forEach(function(el){
-     dataArray.push([new Date(d._id), d.numSessions]);
+     dataArray.push([new Date(d._id).toTimeString().substr(0, 8), d.numSessions]);
    });
    // Callback that creates and populates a data table,
    // instantiates the pie chart, passes in the data and
