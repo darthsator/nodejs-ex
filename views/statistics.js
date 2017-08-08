@@ -24,7 +24,7 @@ function createChart(data) {
    google.charts.setOnLoadCallback(drawChart);
    var dataArray = [];
    dataArray.push(['Session', 'Events']);
-   data.forEach(function(el){
+   data.forEach(function(d){
      dataArray.push([new Date(d._id).toTimeString().substr(0, 8), d.numSessions]);
    });
    // Callback that creates and populates a data table,
