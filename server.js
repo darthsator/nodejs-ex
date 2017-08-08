@@ -219,11 +219,12 @@ app.post('/loadStats', function(req, res){
   if (db) {
     var result = '{empty}';
     console.log('Method: '+ evtMethod);
-
+    var col = db.collection('roomEvents');
     switch (evtMethod) {
       case 'sessionCount':
         console.log('need session count');
-        res.json('{count sessions shold be here: 35415}');
+        result = col.aggregate({$group : {_id:"$session", numSessions:{$sum: 1}}});
+        res.json(result);
       break;
       default:
       db.collection('roomEvents').count(function(err, count ) {
