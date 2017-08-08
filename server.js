@@ -222,14 +222,17 @@ app.post('/loadStats', function(req, res){
     var col = db.collection('roomEvents');
     switch (evtMethod) {
       case 'sessionCount':
-        result = col.aggregate({"$group" : {"_id":"$session", "numSessions":{"$sum": 1}}});
-        console.log(result);
-        res.json(result);
+        result = col.aggregate({"$group" : {"_id":"$session", "numSessions":{"$sum": 1}}}, function(err, data){
+          console.log(data);
+          res.json(data);
+        });
+
       break;
       case 'sessionsByHour':
-        result = col.aggregate({"$group": {"_id": {"hour": {"$hour": "$@session"}}}, "count": {"$sum": 1}});
-        console.log(result);
-        res.json(result);
+        result = col.aggregate({"$group": {"_id": {"hour": {"$hour": "$@session"}}}, "count": {"$sum": 1}}, function(err, data){
+          console.log(data);
+          res.json(data);
+        });
       break;
       default:
       db.collection('roomEvents').count(function(err, count ) {

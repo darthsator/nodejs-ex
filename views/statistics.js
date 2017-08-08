@@ -40,3 +40,16 @@ $(document).ready(function() {
   //         alert('The user selected ' + value);
   //       }
 });
+
+
+function loadStats(command){
+  command = $('#stats_method');
+  var command = {cmd:command};
+  $.ajax({
+    type: "POST",
+    dataType: "json",
+    contentType: "application/json;charset=UTF-8",
+    data: JSON.stringify(command),
+    url: baseUrl+'loadStats'
+  });
+}

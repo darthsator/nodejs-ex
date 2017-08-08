@@ -21,17 +21,6 @@ $(document).ready(function() {
 
 });
 
-function loadStats(command){
-  var command = {cmd:command};
-  $.ajax({
-    type: "POST",
-    dataType: "json",
-    contentType: "application/json;charset=UTF-8",
-    data: JSON.stringify(command),
-    url: baseUrl+'loadStats'
-  });
-}
-
 function createRooms(event=null) {
    $("#conf_rooms").prop('disabled', true);
   // console.log(event);
