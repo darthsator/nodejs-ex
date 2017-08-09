@@ -11,7 +11,7 @@ $(document).ready(function() {
 });
 
 function getMethodsSuccessful(data) {
-  if(!jQuery.isEmptyObject(data) {
+  if(!jQuery.isEmptyObject(data)) {
     data.forEach(function(d){
       $('#statsMethods').append("<option value='"+d.method+"'>"+d.method+"</option>");
     });
