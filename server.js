@@ -259,8 +259,9 @@ app.post('/loadStats', function(req, res){
       case 'sessionCount':
         result = col.aggregate(
                     // {"$match":{"session":{"$gte":100,"$lte":1000}}},
+                    // ,"numProducts":{"$sum": 1}
                     {"$group" : {"_id":"$session", "numSessions":{"$sum": 1}}}
-                    , function(err, data){
+                    , function(err, data) {
                         if (err) console.log(err);
                         console.log(data);
                         res.json(data);
@@ -271,17 +272,21 @@ app.post('/loadStats', function(req, res){
       result = col.aggregate(
         {"$group": {
           "_id": {
-            hour: {
-              $hour: "$@session"
-            }
+            "hour": {
+              "$hour": "$@session"
+              }
+            },
+            "count": {"$sum": 1}
           }
         },
-        "count": {"$sum": 1}
-      }, function(err, data) {
+      function(err, data) {
         if (err) console.log(err);
           console.log(data);
           res.json(data);
         });
+      break;
+      case 'roomUtilisation':
+        res.send('TO IMPLEMENT');
       break;
       default:
       db.collection('roomEvents').count(function(err, count ) {

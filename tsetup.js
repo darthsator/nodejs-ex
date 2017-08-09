@@ -53,7 +53,8 @@ module.exports.statsMethods = function(sdb) {
       if (delOK) console.log("Table supportedMethods dropped");
     });
     var methods = [{method:"sessionCount"},
-                   {method:"sessionsByHour"}
+                   {method:"sessionsByHour"},
+                   {method:"roomUtilisation"}
                  ];
     col.insertMany(methods, function(err, res){
       if (err) console.log(err);
