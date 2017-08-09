@@ -8,6 +8,7 @@ var express    = require('express'),
     bodyParser = require('body-parser');
 
 
+
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
@@ -155,13 +156,32 @@ app.get('/setupTests', function (req, res) {
     initDb(function(err){});
   }
   if (db) {
-    tsetup.testproducts(db, function(result) {
-      if(result) {
-        res.send('setup ok');
-      } else {
-        res.send('setting up test failed');
-      }
-    });
+    var response=null;
+    var promises = [tsetup.testproducts(db), tsetup.statsMethods(db)];
+    // tsetup.testproducts(db, function(result) {
+    //   if(result) {
+    //     console.log('setup testproducts ok');
+    //     response += "{products:ok}";
+    //   } else {
+    //     response += "{products:fail}";
+    //     res.send('setting up testproducts failed');
+    //   }
+    // });
+    // tsetup.statsMethods(db, function(result) {
+    //   if(result) {
+    //     console.log('setup statsMethods ok');
+    //     response += "{methods:ok}";
+    //   } else {
+    //     response += "{methods:fail}";
+    //     res.send('setting up statsMethods failed');
+    //   }
+    //   res.send(response);
+    // });
+    Promise.all(promises)
+    .then(function() {
+       res.send('everything changed then the fire nation inserted');
+      })
+    .catch(console.error);
   } else {
     res.send('{ no db con here }')
   }
@@ -237,11 +257,14 @@ app.post('/loadStats', function(req, res){
     var col = db.collection('roomEvents');
     switch (evtMethod) {
       case 'sessionCount':
-        result = col.aggregate({"$group" : {"_id":"$session", "numSessions":{"$sum": 1}}}, function(err, data){
-          if (err) console.log(err);
-          console.log(data);
-          res.json(data);
-        });
+        result = col.aggregate(
+                    // {"$match":{"session":{"$gte":100,"$lte":1000}}},
+                    {"$group" : {"_id":"$session", "numSessions":{"$sum": 1}}}
+                    , function(err, data){
+                        if (err) console.log(err);
+                        console.log(data);
+                        res.json(data);
+                      });
 
       break;
       case 'sessionsByHour':
