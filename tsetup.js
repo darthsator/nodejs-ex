@@ -3,7 +3,7 @@ module.exports.testproducts = function(sdb, callback) {
 
   sdb.collection("products").drop(function(err, delOK) {
     if (err) throw err;
-    if (delOK) console.log("Table deleted");
+    if (delOK) console.log("Table products dropped");
   });
   // sdb.collection('counts').drop(function(err, delOK) {
   //   if (err) throw err;
@@ -35,5 +35,22 @@ module.exports.testproducts = function(sdb, callback) {
       console.log(result);
       callback(result);
     });
+  });
+}
+
+module.exports.statsMethods = function(sdb, callback) {
+  var result = false;
+  var col = sdb.collection("supportedMethods");
+  col.drop(function(err, delOK) {
+    if (err) console.log(err);
+    if (delOK) console.log("Table supportedMethods dropped");
+  });
+  var methods = [{method:"sessionCount"},
+                 {method:"sessionsByHour"}
+               ];
+  col.insertMany(methods, function(err, res){
+    if (err) console.log(err);
+    console.log('insert done');
+    callback(result);
   });
 }

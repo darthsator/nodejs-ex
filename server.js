@@ -206,6 +206,21 @@ app.get('/getAllEvents', function (req, res) {
   }
 });
 
+app.get('/getAllMethods', function (req, res) {
+  if (!db) {
+    initDb(function(err){});
+  }
+  if (db) {
+    db.collection('supportedMethods').find({}).toArray(function(err, result) {
+       if (err) console.log(err);
+       res.setHeader('Access-Control-Allow-Origin', '*');
+       res.json(result);
+     });
+  } else {
+    res.send('{ no db con here }')
+  }
+});
+
 app.post('/loadStats', function(req, res){
 
   var postData = req.body;

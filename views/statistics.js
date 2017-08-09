@@ -24,6 +24,9 @@ function createChart(data) {
    google.charts.setOnLoadCallback(drawChart);
    var dataArray = [];
    dataArray.push(['Session', 'Events']);
+   data.sort(function(a,b) {
+     return parseInt(a._id - b._id);
+   });
    data.forEach(function(d){
      dataArray.push([new Date(d._id).toTimeString().substr(0, 8), d.numSessions]);
    });
