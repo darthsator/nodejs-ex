@@ -25,15 +25,20 @@ function getMethodsFailed(data, textStatus, err) {
 
 function loadStats(command){
   command = $('#stats_method').val();
-  var command = {cmd:command};
+  var com = {cmd:command};
   $.ajax({
     type: "POST",
     dataType: "json",
     contentType: "application/json;charset=UTF-8",
-    data: JSON.stringify(command),
+    data: JSON.stringify(com),
     url: baseUrl+'loadStats'
   })
-  .done(createChart);
+  .done(createChart)
+  .fail(createChart([
+    {_id:Date.now(), numSessions:20},
+    {_id:Date.now()-60*60*1000, numSessions:10},
+    {_id:Date.now()-60*60*2*1000, numSessions:5},
+  ]));
 }
 
 function createChart(data) {
@@ -47,7 +52,8 @@ function createChart(data) {
        return parseInt(a._id - b._id);
      });
      data.forEach(function(d){
-       dataArray.push([new Date(d._id).toTimeString().substr(0, 8), d.numSessions]);
+       var date = new Date(d._id);
+       dataArray.push([date.toISOString().substr(5,5)+" "+(date.toTimeString().substr(0, 8)), d.numSessions]);
      });
      // Callback that creates and populates a data table,
      // instantiates the pie chart, passes in the data and
@@ -63,13 +69,11 @@ function createChart(data) {
 
        // Set chart options
        var options = {'title':$('#stats_method').val(),
-                      'width':700,
-                      'height':300,
                     legend: { position: 'bottom' }
                     };
 
      // Instantiate and draw our chart, passing in some options.
-       chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+       chart = new google.visualization.LineChart(document.getElementById('line_chart_div'));
       //  google.visualization.events.addListener(chart, 'select', selectHandler);
        chart.draw(data, options);
      }

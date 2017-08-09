@@ -1,5 +1,5 @@
 // module.exports.testproducts = function(sdb, callback) {
-module.exports.testproducts = function(sdb, callback) {
+module.exports.testproducts = function(sdb) {
   return new Promise(function(resolve, reject){
 
 
@@ -44,7 +44,7 @@ module.exports.testproducts = function(sdb, callback) {
 }
 
 // module.exports.statsMethods = function(sdb, callback) {
-module.exports.statsMethods = function(sdb, callback) {
+module.exports.statsMethods = function(sdb) {
   return new Promise(function(resolve, reject){
     var result = false;
     var col = sdb.collection("supportedMethods");
