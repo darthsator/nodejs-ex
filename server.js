@@ -241,9 +241,8 @@ app.post('/loadStats', function(req, res){
       result = col.aggregate(
         // {"$match":{"session":{"$gte":100,"$lte":1000}}},
         // ,"numProducts":{"$sum": 1}
-        {
-          $group : {
-            _id : "$session", "numSessions":{$sum: 1}, "numProducts":{$count:"tag"}
+        {$group : {
+            _id : "$session", "numSessions":{$sum: 1}, "numProducts":{$sum:"tag"}
           }
         }
         , function(err, data) {
