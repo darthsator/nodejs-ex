@@ -280,7 +280,7 @@ app.post('/loadStats', function(req, res){
           {"$group": {
             "_id": {
               "hour": {
-                "$hour": "$dt")
+                "$hour": "$dt"
               }
             },
             "count": {"$sum": 1}
