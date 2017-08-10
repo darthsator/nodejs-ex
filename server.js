@@ -242,7 +242,7 @@ app.post('/loadStats', function(req, res){
         // {"$match":{"session":{"$gte":100,"$lte":1000}}},
         // ,"numProducts":{"$sum": 1}
         {$group : {
-            _id : "$session", "numSessions":{$sum: 1}
+            _id : "$session", "numSessions":{$sum: 1}, "tags":"$tag"
           }
         },
         {$group : {
@@ -270,8 +270,7 @@ app.post('/loadStats', function(req, res){
             },
             count: {"$sum": "$session"}
           }
-        },
-        { $group : {_id: 1, count: {$sum: 1}}
+        }
         },
         function(err, data) {
           if (err) console.log(err);
