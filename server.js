@@ -270,7 +270,6 @@ app.post('/loadStats', function(req, res){
             },
             count: {"$sum": "$session"}
           }
-        }
         },
         function(err, data) {
           if (err) console.log(err);
