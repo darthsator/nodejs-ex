@@ -1,11 +1,11 @@
 //  OpenShift sample Node application
 var express    = require('express'),
-    fs         = require('fs'),
-    app        = express(),
-    eps        = require('ejs'),
-    morgan     = require('morgan'),
-    tsetup     = require('./tsetup.js'),
-    bodyParser = require('body-parser');
+fs         = require('fs'),
+app        = express(),
+eps        = require('ejs'),
+morgan     = require('morgan'),
+tsetup     = require('./tsetup.js'),
+bodyParser = require('body-parser');
 
 
 
@@ -16,22 +16,22 @@ app.use(morgan('combined'));
 app.use(express.static(__dirname + '/views'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }));
 app.set('json spaces', 2);
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
-    ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
-    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
-    mongoURLLabel = "";
+ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
+mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
+mongoURLLabel = "";
 
 if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
   var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
-      mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
-      mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
-      mongoDatabase = process.env[mongoServiceName + '_DATABASE'],
-      mongoPassword = process.env[mongoServiceName + '_PASSWORD']
-      mongoUser = process.env[mongoServiceName + '_USER'];
+  mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
+  mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
+  mongoDatabase = process.env[mongoServiceName + '_DATABASE'],
+  mongoPassword = process.env[mongoServiceName + '_PASSWORD']
+  mongoUser = process.env[mongoServiceName + '_USER'];
 
   if (mongoHost && mongoPort && mongoDatabase) {
     mongoURLLabel = mongoURL = 'mongodb://';
@@ -44,7 +44,7 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
 
   }
 }
- db = null;
+db = null;
 var dbDetails = new Object();
 
 var initDb = function(callback) {
@@ -127,10 +127,10 @@ app.get('/getAllVisitors', function (req, res) {
   }
   if (db) {
     db.collection('visitors').find({}).toArray(function(err, result) {
-       if (err) throw err;
-       res.setHeader('Access-Control-Allow-Origin', '*');
-       res.json(result);
-     })
+      if (err) throw err;
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.json(result);
+    })
   } else {
     res.send('{ no db con here }')
   }
@@ -142,10 +142,10 @@ app.get('/getAllProducts', function (req, res) {
   }
   if (db) {
     db.collection('products').find({}).toArray(function(err, result) {
-       if (err) console.log(err);
-       res.setHeader('Access-Control-Allow-Origin', '*');
-       res.json(result);
-     })
+      if (err) console.log(err);
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.json(result);
+    })
   } else {
     res.send('{ no db con here }')
   }
@@ -179,8 +179,8 @@ app.get('/setupTests', function (req, res) {
     // });
     Promise.all(promises)
     .then(function() {
-       res.send('everything changed then the fire nation inserted');
-      })
+      res.send('everything changed then the fire nation inserted');
+    })
     .catch(console.error);
   } else {
     res.send('{ no db con here }')
@@ -197,14 +197,14 @@ app.post('/sendEvents', function(req, res) {
     initDb(function(err){});
   }
   if (db) {
-      var col = db.collection('roomEvents');
-      col.insertMany(postData, function(err, result) {
-        if (err) console.log(err);
-        res.json(result);
-      });
-      // postData.forEach(function(evt){
-      //   col.insert
-      // });
+    var col = db.collection('roomEvents');
+    col.insertMany(postData, function(err, result) {
+      if (err) console.log(err);
+      res.json(result);
+    });
+    // postData.forEach(function(evt){
+    //   col.insert
+    // });
 
   } else {
     res.send('{ no db con here }')
@@ -217,10 +217,10 @@ app.get('/getAllEvents', function (req, res) {
   }
   if (db) {
     db.collection('roomEvents').find({}).toArray(function(err, result) {
-       if (err) console.log(err);
-       res.setHeader('Access-Control-Allow-Origin', '*');
-       res.json(result);
-     });
+      if (err) console.log(err);
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.json(result);
+    });
   } else {
     res.send('{ no db con here }')
   }
@@ -232,10 +232,10 @@ app.get('/getAllMethods', function (req, res) {
   }
   if (db) {
     db.collection('supportedMethods').find({}).toArray(function(err, result) {
-       if (err) console.log(err);
-       res.setHeader('Access-Control-Allow-Origin', '*');
-       res.json(result);
-     });
+      if (err) console.log(err);
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.json(result);
+    });
   } else {
     res.send('{ no db con here }')
   }
@@ -257,63 +257,68 @@ app.post('/loadStats', function(req, res){
     var col = db.collection('roomEvents');
     switch (evtMethod) {
       case 'sessionCount':
-        result = col.aggregate(
-                    // {"$match":{"session":{"$gte":100,"$lte":1000}}},
-                    // ,"numProducts":{"$sum": 1}
-                    {"$group" : {"_id":"$session", "numSessions":{"$sum": 1}}}
-                    , function(err, data) {
-                        if (err) console.log(err);
-                        console.log(data);
-                        res.json(data);
-                      });
-
-      break;
-      case 'sessionsByHour':
       result = col.aggregate(
-        {"$group": {
-          "_id": {
-            "hour": {
-              "$hour": new Date("$@session")
+        // {"$match":{"session":{"$gte":100,"$lte":1000}}},
+        // ,"numProducts":{"$sum": 1}
+        {
+          "$group" : {"_id":"$session", "numSessions":{"$sum": 1}}
+        }
+        , function(err, data) {
+          if (err) console.log(err);
+          console.log(data);
+          res.json(data);
+        });
+        break;
+        case 'sessionsByHour':
+        result = col.aggregate(
+          $project : {
+            _id : "$_id",
+            dt : {$add: [new Date(0), "$session"]}
+          },
+          {"$group": {
+            "_id": {
+              "hour": {
+                "$hour": "$dt")
               }
             },
             "count": {"$sum": 1}
           }
         },
-      function(err, data) {
-        if (err) console.log(err);
+        function(err, data) {
+          if (err) console.log(err);
           console.log(data);
           res.json(data);
         });
-      break;
-      case 'roomUtilisation':
+        break;
+        case 'roomUtilisation':
         res.send('TO IMPLEMENT');
-      break;
-      default:
-      db.collection('roomEvents').count(function(err, count ) {
-        if (err) console.log(err);
-        console.log('count events: '+count);
-        res.json('{ events: ' + count + '}');
-      });
-      break;
+        break;
+        default:
+        db.collection('roomEvents').count(function(err, count ) {
+          if (err) console.log(err);
+          console.log('count events: '+count);
+          res.json('{ events: ' + count + '}');
+        });
+        break;
+      }
+
+    } else {
+      res.send('{ no db con here }')
     }
+  });
 
-  } else {
-    res.send('{ no db con here }')
-  }
-});
+  // error handling
+  app.use(function(err, req, res, next){
+    console.error(err.stack);
+    res.status(500).send('Something bad happened!');
+  });
 
-// error handling
-app.use(function(err, req, res, next){
-  console.error(err.stack);
-  res.status(500).send('Something bad happened!');
-});
+  initDb(function(err){
+    console.log('Error connecting to Mongo. Message:\n'+err);
+  });
 
-initDb(function(err){
-  console.log('Error connecting to Mongo. Message:\n'+err);
-});
+  app.listen(port, ip);
+  console.log('Server running on http://%s:%s', ip, port);
 
-app.listen(port, ip);
-console.log('Server running on http://%s:%s', ip, port);
-
-module.exports = app ;
-module.exports.database = db;
+  module.exports = app ;
+  module.exports.database = db;
