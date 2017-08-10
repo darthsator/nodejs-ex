@@ -158,25 +158,6 @@ app.get('/setupTests', function (req, res) {
   if (db) {
     var response=null;
     var promises = [tsetup.testproducts(db), tsetup.statsMethods(db)];
-    // tsetup.testproducts(db, function(result) {
-    //   if(result) {
-    //     console.log('setup testproducts ok');
-    //     response += "{products:ok}";
-    //   } else {
-    //     response += "{products:fail}";
-    //     res.send('setting up testproducts failed');
-    //   }
-    // });
-    // tsetup.statsMethods(db, function(result) {
-    //   if(result) {
-    //     console.log('setup statsMethods ok');
-    //     response += "{methods:ok}";
-    //   } else {
-    //     response += "{methods:fail}";
-    //     res.send('setting up statsMethods failed');
-    //   }
-    //   res.send(response);
-    // });
     Promise.all(promises)
     .then(function() {
       res.send('everything changed then the fire nation inserted');
@@ -190,7 +171,7 @@ app.get('/setupTests', function (req, res) {
 app.post('/sendEvents', function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   var postData = req.body;
-  console.log(req.body);
+  // console.log(req.body);
 
   // console.log();
   if (!db) {
@@ -261,7 +242,9 @@ app.post('/loadStats', function(req, res){
         // {"$match":{"session":{"$gte":100,"$lte":1000}}},
         // ,"numProducts":{"$sum": 1}
         {
-          "$group" : {"_id":"$session", "numSessions":{"$sum": 1}}
+          $group : {
+            _id : "$session", "numSessions":{$sum: 1}, "numProducts":{$count:"tag"}
+          }
         }
         , function(err, data) {
           if (err) console.log(err);
