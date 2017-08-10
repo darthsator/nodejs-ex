@@ -271,9 +271,11 @@ app.post('/loadStats', function(req, res){
         break;
         case 'sessionsByHour':
         result = col.aggregate(
+          {
           $project : {
             _id : "$_id",
             dt : {$add: [new Date(0), "$session"]}
+            }
           },
           {"$group": {
             "_id": {
