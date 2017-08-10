@@ -1,5 +1,5 @@
 // module.exports.testproducts = function(sdb, callback) {
-module.exports.testproducts = function(sdb, callback) {
+module.exports.testproducts = function(sdb) {
   return new Promise(function(resolve, reject){
 
 
@@ -44,7 +44,7 @@ module.exports.testproducts = function(sdb, callback) {
 }
 
 // module.exports.statsMethods = function(sdb, callback) {
-module.exports.statsMethods = function(sdb, callback) {
+module.exports.statsMethods = function(sdb) {
   return new Promise(function(resolve, reject){
     var result = false;
     var col = sdb.collection("supportedMethods");
@@ -53,7 +53,8 @@ module.exports.statsMethods = function(sdb, callback) {
       if (delOK) console.log("Table supportedMethods dropped");
     });
     var methods = [{method:"sessionCount"},
-                   {method:"sessionsByHour"}
+                   {method:"sessionsByHour"},
+                   {method:"roomUtilisation"}
                  ];
     col.insertMany(methods, function(err, res){
       if (err) console.log(err);

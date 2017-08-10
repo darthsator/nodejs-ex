@@ -89,6 +89,7 @@ dl {
 
 #statistics {
   min-height: 100px;
+  height: 90%;
   background-color:#0d3963;
   padding: 5px;
 }
