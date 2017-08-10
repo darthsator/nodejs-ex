@@ -246,7 +246,7 @@ app.post('/loadStats', function(req, res){
           }
         },
         {$group : {
-            _id: "$session", count: { $sum:"$tag"}
+            _id: "$_id.session", count: { $sum:"$tag"}}
           }
         },
         function(err, data) {
