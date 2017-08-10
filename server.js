@@ -268,7 +268,7 @@ app.post('/loadStats', function(req, res){
 
       break;
       case 'sessionsByHour':
-        result = col.aggregate({"$group": {"_id": {"hour": {"$hour": "$@session"}}}, "count": {"$sum": 1}}, function(err, data){
+        result = col.aggregate({"$group": {"_id": {"hour": {"$hour": new Date("$session")}}}, "count": {"$sum": 1}}, function(err, data){
           if (err) console.log(err);
           console.log(data);
           res.json(data);
