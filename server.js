@@ -277,9 +277,10 @@ app.post('/loadStats', function(req, res){
             dt : {$add: [new Date(0), "$session"]}
             }
           },
-          {"$group": {
-            "_id": {
-              "hour": {
+          {
+          $group: {
+            _id: {
+              hour: {
                 "$hour": "$dt"
               }
             },
