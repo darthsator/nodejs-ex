@@ -246,8 +246,7 @@ app.post('/loadStats', function(req, res){
           }
         },
         {$group : {
-          _id: 1, count: "$tag"
-          }
+          _id: "$session", count: { sum:"$tag"}
         },
         function(err, data) {
           if (err) console.log(err);
@@ -268,7 +267,7 @@ app.post('/loadStats', function(req, res){
                 "$hour": "$dt"
               }
             },
-            count: {"$sum": 1}
+            count: {"$sum": "$session"}
           }
         },
         { $group : {_id: 1, count: {$sum: 1}}
