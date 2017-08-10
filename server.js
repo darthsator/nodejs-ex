@@ -242,9 +242,10 @@ app.post('/loadStats', function(req, res){
         // {"$match":{"session":{"$gte":100,"$lte":1000}}},
         // ,"numProducts":{"$sum": 1}
         {$group : {
-            _id : "$session", "numSessions":{$sum: 1}, "numProducts":{$sum:"$tag"}
+            _id : "$session", "numSessions":{$sum: 1}
           }
-        }
+        },
+        {$group : {_id: 1, count: {"$tag"}}}
         , function(err, data) {
           if (err) console.log(err);
           console.log(data);
@@ -253,14 +254,12 @@ app.post('/loadStats', function(req, res){
         break;
         case 'sessionsByHour':
         result = col.aggregate(
-          {
-          $project : {
+          {$project : {
             _id : "$_id",
             dt : {$add: [new Date(0), "$session"]}
             }
           },
-          {
-          $group: {
+          {$group: {
             _id: {
               hour: {
                 "$hour": "$dt"
@@ -268,6 +267,8 @@ app.post('/loadStats', function(req, res){
             },
             "count": {"$sum": 1}
           }
+        },
+        { $group : {_id: 1, count: {$sum: 1}}
         },
         function(err, data) {
           if (err) console.log(err);
