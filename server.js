@@ -244,7 +244,7 @@ app.post('/loadStats', function(req, res){
         // {$group : {_id : "$session", "numSessions":{$sum: 1}}
 
         {$group:{
-          "session" : "$session","evts":{$sum: 1},uniqueTags: {$addToSet: "$tag"}}
+          {"session" : "$session"},"evts":{$sum: 1},uniqueTags: {$addToSet: "$tag"}}
         },
         {$project:
           {"session":1,uniqueTagCount:{$size:"$uniqueTags"}, numEvents: "$evts"}
