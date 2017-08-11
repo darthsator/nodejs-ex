@@ -1,3 +1,9 @@
+// mongo -u admin -p $MONGODB_ADMIN_PASSWORD admin
+// use sampledb
+// show collections
+
+
+
 // module.exports.testproducts = function(sdb, callback) {
 module.exports.testproducts = function(sdb) {
   return new Promise(function(resolve, reject){

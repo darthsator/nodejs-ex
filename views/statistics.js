@@ -49,11 +49,11 @@ function createChart(data) {
      var dataArray = [];
      dataArray.push(['Session', 'Events']);
      data.sort(function(a,b) {
-       return parseInt(a._id - b._id);
+       return parseInt(a._id.session - b._id.session);
      });
      data.forEach(function(d){
-       var date = new Date(d._id);
-       dataArray.push([date.toISOString().substr(5,5)+" "+(date.toTimeString().substr(0, 8)), d.numSessions]);
+       var date = new Date(d._id.session);
+       dataArray.push([date.toISOString().substr(5,5)+" "+(date.toTimeString().substr(0, 8)), d.numEvents]);
      });
      // Callback that creates and populates a data table,
      // instantiates the pie chart, passes in the data and
