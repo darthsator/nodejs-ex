@@ -244,7 +244,7 @@ app.post('/loadStats', function(req, res){
         // {$group : {_id : "$session", "numSessions":{$sum: 1}}
 
         {$group:{
-          _id:{"session" : "$session"},"evts":{$sum: 1},uniqueTags: {$addToSet: "$tag"}}
+          "session" : "$session","evts":{$sum: 1},uniqueTags: {$addToSet: "$tag"}}
         },
         {$project:
           {"session":1,uniqueTagCount:{$size:"$uniqueTags"}, numEvents: "$evts"}
@@ -279,8 +279,13 @@ app.post('/loadStats', function(req, res){
         break;
         case 'roomUtilisation':
           col.aggregate(
-            { $group : {_id: "$room", count: {$sum: 1}}
+            {$match :{"room":{"$in":postData.rooms}}
             },
+            { $group : {_id: {room:"$room"}, evts: {$sum: 1},uniqueTags: {$addToSet: "$tag"}}
+            },
+            {$project:
+              {"room":1,uniqueTagCount:{$size:"$uniqueTags"}, numEvents: "$evts"}
+            } ,
             function(err, data) {
               if (err) console.log(err);
               console.log(data);

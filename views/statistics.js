@@ -45,13 +45,13 @@ function createChart(data) {
      // Set a callback to run when the Google Visualization API is loaded.
      google.charts.setOnLoadCallback(drawChart);
      var dataArray = [];
-     dataArray.push(['Session', 'Events']);
+     dataArray.push(['Session', 'Events', 'Products']);
      data.sort(function(a,b) {
-       return parseInt(a._id.session - b._id.session);
+       return parseInt(a.session - b.session);
      });
      data.forEach(function(d){
        var date = new Date(d._id.session);
-       dataArray.push([date.toISOString().substr(5,5)+" "+(date.toTimeString().substr(0, 8)), d.numEvents]);
+       dataArray.push([date.toISOString().substr(5,5)+" "+(date.toTimeString().substr(0, 8)), d.numEvents,d.uniqueTags]);
      });
      // Callback that creates and populates a data table,
      // instantiates the pie chart, passes in the data and
