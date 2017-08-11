@@ -241,14 +241,14 @@ app.post('/loadStats', function(req, res){
       result = col.aggregate(
         // {"$match":{"session":{"$gte":100,"$lte":1000}}},
         // ,"numProducts":{"$sum": 1}
-        {$group : {
-            _id : "$session", "numSessions":{$sum: 1}, "tags":"$tag"
-          }
+        // {$group : {_id : "$session", "numSessions":{$sum: 1}}
+
+        {$group:{
+          _id:{"session" : "$session"},"numSessions":{$sum: 1},uniqueTags: {$addToSet: "$tag"}}
         },
-        {$group : {
-            _id: "$_id.session", count: { $sum:"$tag"}
-          }
-        },
+        {$project:
+          {"session":1,uniqueTagCount:{$size:"$uniqueTags"}}
+        } ,
         function(err, data) {
           if (err) console.log(err);
           console.log(data);
