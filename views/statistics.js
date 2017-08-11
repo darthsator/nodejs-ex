@@ -26,6 +26,9 @@ function getMethodsFailed(data, textStatus, err) {
 function loadStats(command){
   command = $('#stats_method').val();
   var com = {cmd:command};
+  if(command=='roomUtilisation') {
+    com.rooms = dressrooms.map(function(r){a.id});
+  }
   $.ajax({
     type: "POST",
     dataType: "json",
@@ -47,7 +50,11 @@ function createChart(data) {
      var dataArray = [];
      dataArray.push(['Session', 'Events', 'Products']);
      data.sort(function(a,b) {
-       return parseInt(a.session - b.session);
+       if(a.session) {
+         return parseInt(a.session - b.session);
+       } else {
+         return parseInt(a._id.session - b._id.session);
+       }
      });
      data.forEach(function(d){
        var date = new Date(d._id.session);

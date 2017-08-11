@@ -264,7 +264,7 @@ app.post('/loadStats', function(req, res){
                 "$hour": "$dt"
               }
             },
-            count: {"$sum": "$session"}
+            count: {"$sum": "$_id"}
           }
         },
         function(err, data) {
