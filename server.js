@@ -244,10 +244,10 @@ app.post('/loadStats', function(req, res){
         // {$group : {_id : "$session", "numSessions":{$sum: 1}}
 
         {$group:{
-          _id:{"session" : "$session"},"numSessions":{$sum: 1},uniqueTags: {$addToSet: "$tag"}}
+          _id:{"session" : "$session"},"evts":{$sum: 1},uniqueTags: {$addToSet: "$tag"}}
         },
         {$project:
-          {"session":1,uniqueTagCount:{$size:"$uniqueTags"}, tags: "$numSessions"}
+          {"session":1,uniqueTagCount:{$size:"$uniqueTags"}, numEvents: "$evts"}
         } ,
         function(err, data) {
           if (err) console.log(err);
