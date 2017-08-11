@@ -20,13 +20,13 @@ class Emitter {
     return this.active;
   }
   set isActive(active) {
-    this.active = active;
-    if(active) {
+    if(!this.active && active) {
       this.session = Date.now();
       this.ivHolder = setInterval(this.emit.bind(this), this.emitInterval*1000);
-    } else {
+    } else if(this.active && !active){
       clearInterval(this.ivHolder);
     }
+    this.active = active;
   }
 
   emit() {

@@ -34,11 +34,9 @@ function loadStats(command){
     url: baseUrl+'loadStats'
   })
   .done(createChart)
-  .fail(createChart([
-    {_id:Date.now(), numSessions:20},
-    {_id:Date.now()-60*60*1000, numSessions:10},
-    {_id:Date.now()-60*60*2*1000, numSessions:5},
-  ]));
+  .fail(createChart);
+  // https://stackoverflow.com/questions/40802071/pass-an-extra-argument-to-a-callback-function
+  // https://stackoverflow.com/questions/21985201/pass-extra-parameters-to-jquery-ajax-promise-callback
 }
 
 function createChart(data) {
@@ -60,12 +58,7 @@ function createChart(data) {
      // draws it.
      function drawChart() {
        // Create our data table.
-       var data = google.visualization.arrayToDataTable(dataArray
-        // ['2004',    400],
-        // ['2005',    460],
-        // ['2006',    1120],
-        // ['2007',    540]
-      );
+       var data = google.visualization.arrayToDataTable(dataArray);
 
        // Set chart options
        var options = {'title':$('#stats_method').val(),
@@ -80,9 +73,10 @@ function createChart(data) {
   } else {
     appendToConsole('received empty object');
   }
-   // function selectHandler() {
-   //   var selectedItem = chart.getSelection()[0];
-   //   var value = data.getValue(selectedItem.row, 0);
-   //   alert('The user selected ' + value);
-   // }
 }
+
+// function selectHandler() {
+//   var selectedItem = chart.getSelection()[0];
+//   var value = data.getValue(selectedItem.row, 0);
+//   alert('The user selected ' + value);
+// }
