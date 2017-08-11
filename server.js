@@ -240,14 +240,11 @@ app.post('/loadStats', function(req, res){
       case 'sessionCount':
       result = col.aggregate(
         // {"$match":{"session":{"$gte":100,"$lte":1000}}},
-        // ,"numProducts":{"$sum": 1}
-        // {$group : {_id : "$session", "numSessions":{$sum: 1}}
-
-        {$group:{
-          {"session" : "$session"},"evts":{$sum: 1},uniqueTags: {$addToSet: "$tag"}}
+        {$group: {
+          _id: {"session": "$session"}, "evts": {$sum: 1}, uniqueTags: {$addToSet: "$tag"}}
         },
         {$project:
-          {"session":1,uniqueTagCount:{$size:"$uniqueTags"}, numEvents: "$evts"}
+          {"session": 1, uniqueTagCount: {$size: "$uniqueTags"}, numEvents: "$evts"}
         } ,
         function(err, data) {
           if (err) console.log(err);
@@ -257,14 +254,13 @@ app.post('/loadStats', function(req, res){
         break;
         case 'sessionsByHour':
         result = col.aggregate(
-          {$project : {
-            _id : "$_id",
-            dt : {$add: [new Date(0), "$session"]}
+          { $project : {
+            _id : "$_id", dt : {$add: [new Date(0), "$session"]}
             }
           },
-          {$group: {
-            _id: {
-              hour: {
+          { $group : {
+              _id: {
+                hour: {
                 "$hour": "$dt"
               }
             },
@@ -279,9 +275,11 @@ app.post('/loadStats', function(req, res){
         break;
         case 'roomUtilisation':
           col.aggregate(
-            {$match :{"room":{"$in":postData.rooms}}
+            {$match :
+              {"room":{"$in":postData.rooms}}
             },
-            { $group : {_id: {room:"$room"}, evts: {$sum: 1},uniqueTags: {$addToSet: "$tag"}}
+            { $group : {
+              _id: {room:"$room"}, evts: {$sum: 1},uniqueTags: {$addToSet: "$tag"}}
             },
             {$project:
               {"room":1,uniqueTagCount:{$size:"$uniqueTags"}, numEvents: "$evts"}
@@ -300,7 +298,6 @@ app.post('/loadStats', function(req, res){
         });
         break;
       }
-
     } else {
       res.send('{ no db con here }')
     }
