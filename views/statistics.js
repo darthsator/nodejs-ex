@@ -86,7 +86,7 @@ function createChart(data) {
     function drawChart() {
       // Create our data table.
       var data = google.visualization.arrayToDataTable(dataArray);
-      if(!jQuery.isEmptyObject(data2)) {
+      if(!jQuery.isEmptyObject(dataArray2)) {
         var data2 = google.visualization.arrayToDataTable(dataArray2);
       }
       // Set chart options
