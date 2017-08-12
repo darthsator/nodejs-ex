@@ -279,10 +279,10 @@ app.post('/loadStats', function(req, res){
               {"room":{"$in":postData.rooms}}
             },
             { $group : {
-              _id: {room:"$room"}, evts: {$sum: 1},uniqueTags: {$addToSet: "$tag"}}
+              _id: {room:"$room"}, evts: {$sum: 1}, ut: {$addToSet: "$tag"}}
             },
             {$project:
-              {"room":1,uniqueTagCount:{$size:"$uniqueTags"}, numEvents: "$evts"}
+              {"room":1,uniqueTags:{$size:"$ut"}, numEvents: "$evts"}
             } ,
             function(err, data) {
               if (err) console.log(err);
