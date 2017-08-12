@@ -65,7 +65,7 @@ function createChart(data) {
         dataArray.push(['Hour', 'Visits']);
         data.sort(sortSessionHour);
         data.forEach(function(d){
-          dataArray.push([d._id.hour, d.count]);
+          dataArray.push([d._id.hour, d.sessions]);
         });
       break;
         case "roomUtilisation":
@@ -88,6 +88,9 @@ function createChart(data) {
       var data = google.visualization.arrayToDataTable(dataArray);
       if(!jQuery.isEmptyObject(dataArray2)) {
         var data2 = google.visualization.arrayToDataTable(dataArray2);
+        var options2 = {'title':$('#stats_method').val().toUpperCase()+" BY PRODUCT",
+        legend: { position: 'bottom' }
+      };
       }
       // Set chart options
       var options = {'title':$('#stats_method').val().toUpperCase(),
@@ -110,7 +113,7 @@ function createChart(data) {
     }
     //  google.visualization.events.addListener(chart, 'select', selectHandler);
     chart.draw(data, options);
-    if(chart2) chart2.draw(data2, options);
+    if(chart2) chart2.draw(data2, options2);
     }
   } else {
     appendToConsole('received empty object');
