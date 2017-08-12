@@ -244,7 +244,7 @@ app.post('/loadStats', function(req, res){
           _id: {"session": "$session"}, "evts": {$sum: 1}, uniqueTags: {$addToSet: "$tag"}}
         },
         {$project:
-          {"session": 1, uniqueTagCount: {$size: "$uniqueTags"}, numEvents: "$evts"}
+          {"session": 1, ut: {$size: "$uniqueTags"}, ne: "$evts"}
         } ,
         function(err, data) {
           if (err) console.log(err);

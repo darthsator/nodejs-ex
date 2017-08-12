@@ -58,7 +58,7 @@ function createChart(data) {
      });
      data.forEach(function(d){
        var date = new Date(d._id.session);
-       dataArray.push([date.toISOString().substr(5,5)+" "+(date.toTimeString().substr(0, 8)), d.numEvents,d.uniqueTags]);
+       dataArray.push([date.toISOString().substr(5,5)+" "+(date.toTimeString().substr(0, 8)), d.ne,d.ut]);
      });
      // Callback that creates and populates a data table,
      // instantiates the pie chart, passes in the data and
