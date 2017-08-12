@@ -51,6 +51,7 @@ function createChart(data) {
     // Set a callback to run when the Google Visualization API is loaded.
     google.charts.setOnLoadCallback(drawChart);
     var dataArray = [];
+    var dataArray2 = [];
     switch(lastCommand) {
       case "sessionCount":
         dataArray.push(['Session', 'Events', 'Products']);
@@ -64,15 +65,16 @@ function createChart(data) {
         dataArray.push(['Hour', 'Visits']);
         data.sort(sortSessionHour);
         data.forEach(function(d){
-          dataArray.push([d._id.hout, d.count]);
+          dataArray.push([d._id.hour, d.count]);
         });
       break;
         case "roomUtilisation":
-        dataArray.push(['Room', 'Events', 'Products']);
+        dataArray.push(['Room', 'Events']);
+        dataArray2.push(['Room', 'Products']);
         data.sort(sortRoom);
         data.forEach(function(d){
-          var date = new Date(d._id.session);
-          dataArray.push([date.toISOString().substr(5,5)+" "+(date.toTimeString().substr(0, 8)), d.ne,d.ut]);
+          dataArray.push([d._id.room, d.numEvents]);
+          dataArray2.push([d._id.room, d.uniqueTags]);
         });
       default:
       break;
@@ -84,6 +86,7 @@ function createChart(data) {
     function drawChart() {
       // Create our data table.
       var data = google.visualization.arrayToDataTable(dataArray);
+      var data2 = google.visualization.arrayToDataTable(dataArray2);
 
       // Set chart options
       var options = {'title':$('#stats_method').val().toUpperCase(),
@@ -96,15 +99,17 @@ function createChart(data) {
         chart = new google.visualization.LineChart(document.getElementById('line_chart_div'));
       break;
       case "sessionsByHour":
-        chart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
+        chart = new google.visualization.ColumnChart(document.getElementById('bar_chart_div'));
       break;
       case "roomUtilisation":
         chart = new google.visualization.PieChart(document.getElementById('pie_chart_div'));
+        chart2 = new google.visualization.PieChart(document.getElementById('pie2_chart_div'));
       default:
       break;
     }
     //  google.visualization.events.addListener(chart, 'select', selectHandler);
     chart.draw(data, options);
+    if(chart2) chart2.draw(data2, options);
     }
   } else {
     appendToConsole('received empty object');
