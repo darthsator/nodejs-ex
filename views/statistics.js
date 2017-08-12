@@ -27,7 +27,7 @@ function loadStats(command){
   command = $('#stats_method').val();
   var com = {cmd:command};
   if(command=='roomUtilisation') {
-    com.rooms = dressrooms.map(function(r){a.id});
+    com.rooms = dressrooms.map(function(r){r.id});
   }
   $.ajax({
     type: "POST",
