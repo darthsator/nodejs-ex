@@ -73,8 +73,8 @@ function createChart(data) {
         dataArray2.push(['Room', 'Products']);
         data.sort(sortRoom);
         data.forEach(function(d){
-          dataArray.push([d._id.room, d.numEvents]);
-          dataArray2.push([d._id.room, d.uniqueTags]);
+          dataArray.push(["'"+d._id.room+"''", d.numEvents]);
+          dataArray2.push(["'"+d._id.room+"''", d.uniqueTags]);
         });
       default:
       break;
@@ -86,8 +86,9 @@ function createChart(data) {
     function drawChart() {
       // Create our data table.
       var data = google.visualization.arrayToDataTable(dataArray);
-      var data2 = google.visualization.arrayToDataTable(dataArray2);
-
+      if(!jQuery.isEmptyObject(data2)) {
+        var data2 = google.visualization.arrayToDataTable(dataArray2);
+      }
       // Set chart options
       var options = {'title':$('#stats_method').val().toUpperCase(),
           legend: { position: 'bottom' }
