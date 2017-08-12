@@ -259,7 +259,7 @@ app.post('/loadStats', function(req, res){
             }
           },
           { $group : {
-              _id: {hour: {"hour": "$dt"}, us: {$addToSet: "$session"}}, count: {"$sum": 1}
+              _id: {hour: {"hour": "$dt"}},us: {$addToSet: "$session"}, count: {"$sum": 1}
           }
         },
         { $project: {
