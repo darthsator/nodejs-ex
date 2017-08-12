@@ -264,7 +264,7 @@ app.post('/loadStats', function(req, res){
                 "$hour": "$dt"
               }
             },
-            count: {"$sum": "$_id"}
+            count: {"$sum": 1}
           }
         },
         function(err, data) {
@@ -276,10 +276,10 @@ app.post('/loadStats', function(req, res){
         case 'roomUtilisation':
           col.aggregate(
             {$match :
-              {"room":{"$in":postData.rooms}}
+              {"dressroom":{"$in":postData.rooms}}
             },
             { $group : {
-              _id: {room:"$room"}, evts: {$sum: 1}, ut: {$addToSet: "$tag"}}
+              _id: {room:"$dressroom"}, evts: {$sum: 1}, ut: {$addToSet: "$tag"}}
             },
             {$project:
               {"room":1,uniqueTags:{$size:"$ut"}, numEvents: "$evts"}
