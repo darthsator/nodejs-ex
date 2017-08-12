@@ -255,15 +255,12 @@ app.post('/loadStats', function(req, res){
         case 'sessionsByHour':
         result = col.aggregate(
           { $project : {
-            _id : "$_id", dt : {$add: [new Date(0), "$session"]}
+            _id : "$_id", dt : {$add: [new Date(0), "$session"]}, us: {$addToSet: "$session"}
             }
           },
           { $group : {
-              _id: {hour: {"hour": "$dt"}}, us: {$addToSet: "$session"}, count: {"$sum": 1}
+              _id: {hour: {"hour": "$dt"}}, count: {"$sum": 1}, sessions:{$size: "$us"}
           }
-        },
-        { $project: {
-          "_id":"$hour", num: "$count", sessions:{$size: "$us"}}
         },
         function(err, data) {
           if (err) console.log(err);
