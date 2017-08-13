@@ -263,7 +263,7 @@ app.post('/loadStats', function(req, res){
           }
         },
         { $project : {
-          {"hour":1,sessions:{$size: "$us"}, evts:"$count"}
+            "hour":1,sessions:{$size: "$us"}, evts:"$count"}
         }},
         function(err, data) {
           if (err) console.log(err);
