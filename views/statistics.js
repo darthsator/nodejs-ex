@@ -65,7 +65,7 @@ function createChart(data) {
         dataArray.push(['Hour', 'Visits']);
         data.sort(sortSessionHour);
         data.forEach(function(d){
-          dataArray.push([d._id.hour, d.sessions]);
+          dataArray.push([d._id, d.sessions]);
         });
       break;
         case "roomUtilisation":
@@ -73,8 +73,8 @@ function createChart(data) {
         dataArray2.push(['Room', 'Products']);
         data.sort(sortRoom);
         data.forEach(function(d){
-          dataArray.push(["'"+d._id.room+"''", d.numEvents]);
-          dataArray2.push(["'"+d._id.room+"''", d.uniqueTags]);
+          dataArray.push(["'"+d._id.room+"'", d.numEvents]);
+          dataArray2.push(["'"+d._id.room+"'", d.uniqueTags]);
         });
       default:
       break;
@@ -97,6 +97,8 @@ function createChart(data) {
           legend: { position: 'bottom' }
       };
 
+      var chart = null;
+      var chart2 = null;
     // Instantiate and draw our chart, passing in some options.
     switch(lastCommand) {
       case "sessionCount":
@@ -127,7 +129,7 @@ function sortRoom(a,b) {
 }
 
 function sortSessionHour(a,b) {
-  return parseInt(a._id.hour - b._id.hour);
+  return parseInt(a._id - b._id);
 }
 
 function sortSessionCount(a,b) {
