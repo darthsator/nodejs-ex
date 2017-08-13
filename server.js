@@ -227,7 +227,7 @@ app.post('/loadStats', function(req, res){
   var postData = req.body;
   console.log(postData);
   var evtMethod = postData.cmd;
-  console.log(postData.cmd);
+  console.log(evtMethod);
 
   if (!db) {
     initDb(function(err){});
