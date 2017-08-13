@@ -113,7 +113,9 @@ function createChart(data) {
     }
     //  google.visualization.events.addListener(chart, 'select', selectHandler);
     chart.draw(data, options);
-    if(chart2) chart2.draw(data2, options2);
+    if(!jQuery.isEmptyObject(chart2)) {
+     chart2.draw(data2, options2);
+    }
     }
   } else {
     appendToConsole('received empty object');
