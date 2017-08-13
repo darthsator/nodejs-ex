@@ -259,9 +259,12 @@ app.post('/loadStats', function(req, res){
             }
           },
           { $group : {
-              _id: {hour: {"hour": "$dt"}}, count: {"$sum": 1}, sessions:{$size: "$us"}, us: {$addToSet: "$session"}
+              _id: {hour: {"hour": "$dt"}}, count: {"$sum": 1}, us: {$addToSet: "$session"}
           }
         },
+        { $project : {
+          {"hour":1,sessions:{$size: "$us"}, evts:"$count"}
+        }},
         function(err, data) {
           if (err) console.log(err);
           console.log(data);
